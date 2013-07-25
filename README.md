@@ -40,13 +40,14 @@ You might also need the following first:
 ## Setup Virtualenvwrapper
 * [See this gist](https://gist.github.com/jasonamyers/6076293)
 
+## Setup JShint for Syntastics Javascript support
+
+1. Install [Node.js](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager).
+2. Globally install [JSHint](http://jshint.com/install/).
+3. Place [.jshintrc](http://www.jshint.com/docs/#config) into your `~`, optionally place it into your project directory.
+
 ## Setup CoVim
 * pip install twisted
-
-## Setup Command-T
-* cd ~/.vim/bundle/Command-T
-* ruby extconf.rb
-* make
 
 ## Configure Git
 * git config --global color.ui auto
