@@ -59,3 +59,4 @@ You might also need the following first:
 * git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all"
 * git config --global alias.pu !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
   * Pay Attention to the !" some terms will make it !
+* git config --global github.user Username
