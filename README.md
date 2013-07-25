@@ -32,6 +32,14 @@ You might also need the following first:
 * Add /usr/local/bin/zsh to /etc/shells
 * chsh -s /usr/local/bin/zsh
 
+## Setup VIM
+* git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+* open vim
+* :BundleInstall
+
+## Setup Virtualenvwrapper
+* [See this gist](https://gist.github.com/jasonamyers/6076293)
+
 ## Setup CoVim
 * pip install twisted
 
