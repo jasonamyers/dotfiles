@@ -68,6 +68,9 @@ Bundle "git://github.com/gmarik/vundle"
   Bundle "git://github.com/tpope/vim-surround.git"
 
 " Git:
+ " webapi access for vim
+  Bundle "https://github.com/mattn/webapi-vim.git"
+  
  " vimscript for gist
   Bundle "git://github.com/mattn/gist-vim.git"
 
