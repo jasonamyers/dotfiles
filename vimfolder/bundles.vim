@@ -98,7 +98,7 @@ Bundle "git://github.com/gmarik/vundle"
 
  " Javascript:
   " JSHint fork of jslint.vim
-    Bundle "git://github.com/wookiehangover/jshint.vim.git"
+    Bundle "https://github.com/Shutnik/jshint2.vim"
 
   " Vastly improved vim's javascript indentation.
     Bundle "git://github.com/pangloss/vim-javascript.git"
