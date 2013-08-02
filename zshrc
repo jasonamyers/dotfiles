@@ -45,6 +45,7 @@ alias gco='git checkout'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gbd='git branch -d'
+alias startred='redis-server /usr/local/etc/redis.conf &'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
 # If not running interactively, don't do anything
