@@ -95,6 +95,8 @@ plugins=(git, fabric, osx, pip, redis-cli, sublime, tmux)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/func/color_cmds
+source ~/.nvm/nvm.sh
+nvm use 0.8.6
 # Customize to your needs...
 alias ssh=color-ssh
 alias pmr=color-pmr

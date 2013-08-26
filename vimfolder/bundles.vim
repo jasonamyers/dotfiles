@@ -70,7 +70,7 @@ Bundle "git://github.com/gmarik/vundle"
 " Git:
  " webapi access for vim
   Bundle "https://github.com/mattn/webapi-vim.git"
-  
+
  " vimscript for gist
   Bundle "git://github.com/mattn/gist-vim.git"
 
@@ -90,10 +90,6 @@ Bundle "git://github.com/gmarik/vundle"
 
   " Comment Toggling
     Bundle "git@github.com:scrooloose/nerdcommenter.git"
-
- " Team:
-  " Colaborative editing
-    Bundle "git://github.com/FredKSchott/CoVim.git"
 
  " Markdown:
   " Vim Markdown runtime files
