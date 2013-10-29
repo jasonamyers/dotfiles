@@ -16,6 +16,7 @@ vnoremap y ygv<esc>
 " Always Use Paste Mode When Putting A Buffer:
 nnoremap <silent> p :set paste<CR>p:set nopaste<CR>
 nnoremap <silent> P :set paste<CR>P:set nopaste<CR>
+set pastetoggle=<F3>
 
 " Toggle Search Highlighting:
 nnoremap <silent> // :silent :nohlsearch<CR>
