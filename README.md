@@ -42,7 +42,7 @@ You might also need the following first:
 
 ## Setup JShint for Syntastics Javascript support
 
-1. Install [Node.js](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager).
+1. curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 2. Globally install [JSHint](http://jshint.com/install/).
 3. Place [.jshintrc](http://www.jshint.com/docs/#config) into your `~`, optionally place it into your project directory.
 
