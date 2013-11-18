@@ -9,17 +9,29 @@ To use them:
 * rename your current .bash_profile .bashrc .vim .vimrc
 Setup the links
 ln -s ~/Dropbox/ssh .ssh
+
 chmod 600 .ssh/*
+
 ln -s ~/dotfiles/bash_profile .bash_profile
+
 ln -s ~/dotfiles/bashrc .bashrc
+
 ln -s ~/dotfiles/vimfolder .vim
+
 ln -s ~/dotfiles/vimrc .vimrc
+
 ln -s ~/dotfiles/oh-my-zsh .oh-my-zsh
+
 ln -s ~/dotfiles/zshrc .zshrc
+
 ln -s ~/dotfiles/zsh .zsh
+
 ln -s ~/dotfiles/jshintrc .jshintrc
+
 ln -s ~/dotfiles/pdbrc .pdbrc
+
 ln -s ~/dotfiles/psqlrc .psqlrc
+
 ln -s ~dotfiles/gitconfig .gitconfig
 
 
