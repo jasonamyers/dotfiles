@@ -1,9 +1,9 @@
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
-export TERM=xterm-color 
+export TERM=xterm-color
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
-alias ls='ls -G'  
+alias ls='ls -G'
 alias ll='ls -hlatr --color'
 alias gg='history | grep'
 #alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
@@ -17,7 +17,7 @@ alias pmsh='python manage.py shell'
 alias pmdb='python manage.py dbshell'
 
 
-export GIT_EDITOR="vim" 
+export GIT_EDITOR="vim"
 GIT_PS1_SHOWDIRTYSTATE=true
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
 export COMMAND_MODE=unix2003
@@ -57,8 +57,8 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.3/bin/python
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PROJECT_HOME=$HOME/Develop
-if [[ -r /usr/local/share/python/virtualenvwrapper.sh ]]; then
-    source /usr/local/share/python/virtualenvwrapper.sh
+if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+    source /usr/local/bin/virtualenvwrapper.sh
 else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi

@@ -91,6 +91,10 @@ Bundle "git://github.com/gmarik/vundle"
   " Comment Toggling
     Bundle "git@github.com:scrooloose/nerdcommenter.git"
 
+ " Python:
+  " Auto completion etc
+    "Bundle "git@github.com:davidhalter/jedi-vim.git"
+
  " Markdown:
   " Vim Markdown runtime files
     Bundle "git://github.com/tpope/vim-markdown.git"

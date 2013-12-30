@@ -1,4 +1,3 @@
-" TwiddleCase: Once - Capitalize, Twice - Uppercase, Thrice - Lowercase
 function! TwiddleCase(str)
   if a:str ==# toupper(a:str)
     let result = tolower(a:str)
@@ -9,8 +8,7 @@ function! TwiddleCase(str)
   endif
   return result
 endfunction
-
-vnoremap ~ ygv"=TwiddleCase(@")<CR>Pgv
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " Used with an autocommand to wrap lines on certain filetypes
 function! g:PersonalVim_SetupWrapping()
@@ -85,4 +83,16 @@ function! g:PersonalVim_GoogleOperator(type)
   silent execute "! open " . shellescape("https://www.google.com/search?q=" . @@)
   let @@ = saved_register
   redraw!
+endfunction
+
+highlight WhiteOnRed ctermbg=red ctermfg=white
+function! HLNext (blinktime)
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    let target_pat = '\c\%#'.@/
+    let ring = matchadd('WhiteOnRed', target_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
 endfunction

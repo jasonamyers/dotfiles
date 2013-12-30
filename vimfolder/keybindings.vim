@@ -59,10 +59,10 @@ nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
 " Disable Arrow Keys For Criminies:
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
+"inoremap <Up> <NOP>
+"inoremap <Down> <NOP>
+"inoremap <Left> <NOP>
+"inoremap <Right> <NOP>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -74,3 +74,7 @@ nnoremap <silent> <leader>r :call g:PersonalVim_Refresh()<CR>
 " Google For The Word Under The Curson:
 nnoremap gl :set operatorfunc=g:PersonalVim_GoogleOperator<CR>g@
 vnoremap gl :<C-u>call g:PersonalVim_GoogleOperator(visualmode())<CR>
+
+" This rewires n and N to do the highlighing:
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>

@@ -3,6 +3,9 @@ setopt PROMPT_SUBST
 autoload -U promptinit
 promptinit
 #prompt grb
+unalias run-help
+autoload run-help
+HELPDIR=/usr/local/share/zsh/helpfiles
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -58,14 +61,18 @@ export SAVEHIST=$HISTSIZE
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
-
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+export PYVER_ROOT=`pyenv prefix`
+export PYVER_BIN="$PYVER_ROOT/bin"
 export WORKON_HOME=$HOME/.virtualenv
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+export VIRTUALENVWRAPPER_PYTHON=`which python`
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PROJECT_HOME=$HOME/Develop
-if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
-    source /usr/local/bin/virtualenvwrapper.sh
+if [[ -r $PYVER_BIN/virtualenvwrapper.sh ]]; then
+    source $PYVER_BIN/virtualenvwrapper.sh
 else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi

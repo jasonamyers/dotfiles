@@ -2,9 +2,9 @@
 " Language:     Python
 " Maintainer:   Dmitry Vasiliev <dima at hlabs dot org>
 " URL:          https://github.com/hdima/python-syntax
-" Last Change:  2013-06-02
+" Last Change:  2013-08-31
 " Filenames:    *.py
-" Version:      3.3.3
+" Version:      3.3.5
 "
 " Based on python.vim (from Vim 6.1 distribution)
 " by Neil Schemenauer <nas at python dot ca>
@@ -29,7 +29,9 @@
 "   John Eikenberry
 "   Marc Weber
 "   Pedro Algarvio
+"   pydave at GitHub
 "   Will Gray
+"   Yuri Habrusiev
 "
 " Options
 " =======
@@ -71,6 +73,13 @@
 "    python_highlight_doctests              Highlight doc-tests
 "    python_print_as_function               Highlight 'print' statement as
 "                                           function for Python 2
+"    python_highlight_file_headers_as_comments
+"                                           Highlight shebang and coding
+"                                           headers as comments
+"    python_highlight_indents               Highlight indents
+"      python_indents_style                 Highlight indents with 5 (default)
+"                                           or 2 colors (valid values for
+"                                           python_indents_style are 1 or 2)
 "
 "    python_highlight_all                   Enable all the options above
 "                                           NOTE: This option don't override
@@ -133,6 +142,11 @@ if s:Enabled("g:python_highlight_all")
   call s:EnableByDefault("g:python_highlight_space_errors")
   call s:EnableByDefault("g:python_highlight_doctests")
   call s:EnableByDefault("g:python_print_as_function")
+  call s:EnableByDefault("g:python_highlight_indents")
+  if s:Enabled("g:python_highlight_indents")
+    " default indents style = 1
+    call s:EnableByDefault("g:python_indents_style")
+  endif
 endif
 
 "
@@ -148,7 +162,7 @@ syn keyword pythonStatement     with
 syn keyword pythonStatement     def class nextgroup=pythonFunction skipwhite
 syn keyword pythonRepeat        for while
 syn keyword pythonConditional   if elif else
-syn keyword pythonPreCondit     import from
+syn keyword pythonImport        import from
 syn keyword pythonException     try except finally
 syn keyword pythonOperator      and in is not or
 
@@ -156,24 +170,13 @@ if s:Python2Syntax()
   if !s:Enabled("g:python_print_as_function")
     syn keyword pythonStatement  print
   endif
-  syn keyword pythonPreCondit   as
+  syn keyword pythonImport      as
   syn match   pythonFunction    "[a-zA-Z_][a-zA-Z0-9_]*" display contained
 else
-  syn keyword pythonStatement   as nonlocal False None True
+  syn keyword pythonStatement   as nonlocal None
+  syn keyword pythonBoolean     True False
   syn match   pythonFunction    "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 endif
-
-
-"
-" Assignments
-"
-
-
-syn match pythonAssignment "+=\|-=\|\*=\|/=\|//=\|%=\|&=\||=\|\^=\|>>=\|<<=\|\*\*="
-syn match pythonAssignment "="
-syn match pythonArithmetic "+\|-\|\*\|\*\*\|/\|//\|%\|<<\|>>\|&\||\|\^\|\~"
-syn match pythonComparison "<\|>\|<=\|>=\|==\|!=\|<>"
-
 
 "
 " Decorators (new in Python 2.4)
@@ -188,8 +191,10 @@ syn match   pythonDot        "\." display containedin=pythonDottedName
 "
 
 syn match   pythonComment	"#.*$" display contains=pythonTodo,@Spell
-syn match   pythonRun		"\%^#!.*$"
-syn match   pythonCoding	"\%^.*\%(\n.*\)\?#.*coding[:=]\s*[0-9A-Za-z-_.]\+.*$"
+if !s:Enabled("g:python_highlight_file_headers_as_comments")
+  syn match   pythonRun		"\%^#!.*$"
+  syn match   pythonCoding	"\%^.*\%(\n.*\)\?#.*coding[:=]\s*[0-9A-Za-z-_.]\+.*$"
+endif
 syn keyword pythonTodo		TODO FIXME XXX contained
 
 "
@@ -201,7 +206,6 @@ syn match pythonError		"[$?]" display
 syn match pythonError		"[&|]\{2,}" display
 syn match pythonError		"[=]\{3,}" display
 
-
 " Mixing spaces and tabs also may be used for pretty formatting multiline
 " statements
 if s:Enabled("g:python_highlight_indent_errors")
@@ -211,6 +215,22 @@ endif
 " Trailing space errors
 if s:Enabled("g:python_highlight_space_errors")
   syn match pythonSpaceError	"\s\+$" display
+endif
+
+" Indents highlight
+if s:Enabled("g:python_highlight_indents")
+  " whitespaces (pep8, guys!)
+  syn match   pythonHLSpace     /\(^\ \{4}\)\{1}/
+  for i in range(1, 30)
+    let pattern='/\(\(^\ \{'.i*4.'}\)\)\@<=\(\ \{4}\)\{1}/'
+    exec 'syn match pythonHLSpace'.i pattern
+  endfor
+  " tabs
+  syn match   pythonHLTab    /^\t\{1}/
+  for i in range(1, 30)
+    let pattern='/\(^\t\{'.i.'}\)\@<=\t\{1}/'
+    exec 'syn match pythonHLTab'.i pattern
+  endfor
 endif
 
 "
@@ -383,7 +403,8 @@ syn match   pythonFloat		"\<\d\+\.\d*\%([eE][+-]\=\d\+\)\=[jJ]\=" display
 
 if s:Enabled("g:python_highlight_builtin_objs")
   if s:Python2Syntax()
-    syn keyword pythonBuiltinObj	True False None
+    syn keyword pythonBuiltinObj	None
+    syn keyword pythonBoolean		True False
   endif
   syn keyword pythonBuiltinObj	Ellipsis NotImplemented
   syn keyword pythonBuiltinObj	__debug__ __doc__ __file__ __name__ __package__
@@ -479,26 +500,22 @@ if version >= 508 || !exists("did_python_syn_inits")
   endif
 
   HiLink pythonStatement        Statement
-  HiLink pythonPreCondit        Statement
+  HiLink pythonImport           Include
   HiLink pythonFunction         Function
-  HiLink pythonDefaultAssignment pythonAssignment
   HiLink pythonConditional      Conditional
   HiLink pythonRepeat           Repeat
   HiLink pythonException        Exception
   HiLink pythonOperator         Operator
-  HiLink pythonSuperclass       Entity
 
-  HiLink pythonOperator         Operator
-  HiLink pythonAssignment       Operator
-  HiLink pythonComparison       Operator
-  HiLink pythonArithmetic       Operator
   HiLink pythonDecorator        Define
   HiLink pythonDottedName       Function
   HiLink pythonDot              Normal
 
   HiLink pythonComment          Comment
-  HiLink pythonCoding           Special
-  HiLink pythonRun              Special
+  if !s:Enabled("g:python_highlight_file_headers_as_comments")
+    HiLink pythonCoding           Special
+    HiLink pythonRun              Special
+  endif
   HiLink pythonTodo             Todo
 
   HiLink pythonError            Error
@@ -542,10 +559,71 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonHexError         Error
   HiLink pythonBinError         Error
 
+  HiLink pythonBoolean          Boolean
+
   HiLink pythonBuiltinObj       Structure
   HiLink pythonBuiltinFunc      Function
 
   HiLink pythonExClass          Structure
+
+  " Indents highlight
+  if s:Enabled("g:python_highlight_indents")
+    if (python_indents_style == 1)
+    " 5 colors
+    HiLink pythonHLTab       DiffChange
+    HiLink pythonHLTab1      Cursor
+    HiLink pythonHLTab2      StatusLine
+    HiLink pythonHLTab3      Todo
+    HiLink pythonHLTab4      Visual
+    HiLink pythonHLTab5      DiffChange
+    HiLink pythonHLTab6      Cursor
+    HiLink pythonHLTab7      StatusLine
+    HiLink pythonHLTab8      Todo
+    HiLink pythonHLTab9      Visual
+    HiLink pythonHLTab10     DiffChange
+
+    HiLink pythonHLStab      DiffChange
+    HiLink pythonHLStab1     Cursor
+    HiLink pythonHLStab2     StatusLine
+    HiLink pythonHLStab3     Todo
+    HiLink pythonHLStab4     Visual
+    HiLink pythonHLStab5     DiffChange
+    HiLink pythonHLStab6     Cursor
+    HiLink pythonHLStab7     StatusLine
+    HiLink pythonHLStab8     Todo
+    HiLink pythonHLStab9     Visual
+    HiLink pythonHLStab10    DiffChange
+
+    HiLink pythonHLSpace     DiffChange
+    HiLink pythonHLSpace1    Cursor
+    HiLink pythonHLSpace2    StatusLine
+    HiLink pythonHLSpace3    Todo
+    HiLink pythonHLSpace4    Visual
+    HiLink pythonHLSpace5    DiffChange
+    HiLink pythonHLSpace6    Cursor
+    HiLink pythonHLSpace7    StatusLine
+    HiLink pythonHLSpace8    Todo
+    HiLink pythonHLSpace9    Visual
+    HiLink pythonHLSpace10   DiffChange
+
+    elseif (python_indents_style == 2)
+    " 2 colors
+    HiLink pythonHLSpace     StatusLineNC
+    HiLink pythonHLTab       StatusLineNC
+    for i in range(1, 30)
+      if i % 2 == 0
+        exec 'HiLink pythonHLSpace' .i. ' StatusLineNC'
+        exec 'HiLink pythonHLTab' .i. ' StatusLineNC'
+      else
+        exec 'HiLink pythonHLSpace' .i. ' PmenuSel'
+        exec 'HiLink pythonHLTab' .i. ' PmenuSel'
+      endif
+    endfor
+
+    else
+      echoe "python-syntax: No such indentation style '". python_indents_style ."' - use 1 or 2"
+    endif
+  endif
 
   delcommand HiLink
 endif

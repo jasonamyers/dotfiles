@@ -6,6 +6,8 @@ set timeout timeoutlen=300                " Do not wait so long for extra keystr
 set history=1000                          " Remeber the last 1000 Ex commands
 set lazyredraw
 set ttyfast                               " Send more characters when redrawing the screen
+set backspace=indent,eol,start            " Allow backspace to go beyond insert start
+
 
 set keywordprg=:help                      " Set it to internal VIM Help
 
@@ -183,3 +185,6 @@ set scrolloff=3                           " Give the cursor some space
 set sidescrolloff=4                       " Give the cursor some space
 set nostartofline                         " Keep Cursor In Same Column When Scrolling If Possible
 set cpoptions+=qI                         " Do Not Move Cursor When Joining Multiple Lines
+
+highlight ColorColumn ctermbg=magenta     " Set your highlight color
+call matchadd('ColorColumn', '\%81v', 100)" Hightlight column 81 on each line if a char is there
