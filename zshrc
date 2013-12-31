@@ -20,6 +20,10 @@ export DEFAULT_USER="jasonamyers"
 export PGHOST=localhost
 autoload -U compinit
 compinit
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 
 
 alias ls='ls -G'
@@ -61,9 +65,6 @@ export SAVEHIST=$HISTSIZE
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PYVER_ROOT=`pyenv prefix`
 export PYVER_BIN="$PYVER_ROOT/bin"
 export WORKON_HOME=$HOME/.virtualenv
