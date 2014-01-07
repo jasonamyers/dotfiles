@@ -47,14 +47,8 @@
   " Keymappings
   "
   " Refresh The Cache:
-  nnoremap <silent> <leader>T :CtrlPBuffer<cr>
+  nnoremap <silent> <leader>T :CtrlPTag<cr>
 
-  " Locate Files More Easily:
-  noremap <leader>jm :CtrlP app/models<CR>
-  noremap <leader>jc :CtrlP app/controllers<CR>
-  noremap <leader>jv :CtrlP app/views<CR>
-  noremap <leader>js :CtrlP spec<CR>
-  noremap <leader>jf :CtrlP factories<CR>
 
   if has("gui_macvim") && has("gui_running")
     " Additional Mapping For Buffer Search:
