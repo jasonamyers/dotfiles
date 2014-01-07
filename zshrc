@@ -15,7 +15,8 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #export ZSH_THEME="agnoster"
-export ZSH_THEME="kolo"
+#export ZSH_THEME="kolo"
+export ZSH_THEME="simple"
 export DEFAULT_USER="jasonamyers"
 export PGHOST=localhost
 autoload -U compinit
