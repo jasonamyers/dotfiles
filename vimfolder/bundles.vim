@@ -94,6 +94,8 @@ Bundle "git://github.com/gmarik/vundle"
  " Python:
   " Auto completion etc
     "Bundle "git@github.com:davidhalter/jedi-vim.git"
+  " PyTest Support
+    Bundle "git://github.com/alfredodeza/pytest.vim.git"
 
  " Markdown:
   " Vim Markdown runtime files
