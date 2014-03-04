@@ -22,7 +22,7 @@ export PGHOST=localhost
 autoload -U compinit
 compinit
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin"
+export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
 eval "$(pyenv init -)"
 
 
@@ -109,7 +109,7 @@ plugins=(git, fabric, osx, pip, redis-cli, sublime, tmux)
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/func/color_cmds
 source ~/.nvm/nvm.sh
-nvm use 0.8.6
+nvm use 0.10.26
 # Customize to your needs...
 alias ssh=color-ssh
 alias pmr=color-pmr
