@@ -29,6 +29,8 @@ eval "$(pyenv init -)"
 
 alias ls='ls -G'
 alias ll='ls -hlatr --color'
+alias lf="ls -l | egrep -v '^d'"
+alias ldir="ls -l | egrep '^d'"
 alias gg='history | grep'
 #alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
 alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"

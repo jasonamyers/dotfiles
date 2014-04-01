@@ -36,10 +36,10 @@ nmap <silent> } }zzzv
 nmap <silent> { {zzzv
 
 " Mimic Unimpaired Style For Navigating Tabs:
-noremap <silent>[r :tabprevious<CR>
-noremap <silent>]r :tabnext<CR>
-noremap <silent>[R <C-O>:tabfirst<CR>
-noremap <silent>]R <C-O>:tablast<CR>
+noremap <silent>[r :bp<CR>
+noremap <silent>]r :bn<CR>
+noremap <silent>[R <C-O>:bfirst<CR>
+noremap <silent>]R <C-O>:blast<CR>
 
 " Mimic Unimpaired Style For Navigating Cursor History:
 nnoremap <silent>[i <C-O>
@@ -53,8 +53,6 @@ nnoremap <silent> gr :let word=expand("<cword>")<CR>:vsp<CR>:wincmd w<cr>:exec("
 nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Create Window Splits Easier:
-nnoremap <silent> tt :tabnew<CR>
-nnoremap <silent> td mA:tabe<space>%<CR>gT`Agt`A
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 

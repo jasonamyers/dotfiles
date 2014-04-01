@@ -160,5 +160,8 @@ Bundle "git://github.com/gmarik/vundle"
  " Precision colorscheme for the vim text editor
   Bundle "git://github.com/altercation/vim-colors-solarized.git"
 
+ " Base16 Color Scheme
+  Bundle 'chriskempson/base16-vim'
+
  " More colorschemes
   Bundle "git://github.com/daylerees/colour-schemes", { "rtp": "vim-themes/" }

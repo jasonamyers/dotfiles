@@ -8,6 +8,7 @@
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
     pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
+    s = "status -su"
 	ctags = !.git/hooks/ctags
 [github]
 	user = jasonamyers
@@ -15,3 +16,5 @@
 	default = simple
 [init]
 	templatedir = ~/.git_template
+[pull]
+	ff = only
