@@ -32,7 +32,7 @@ ln -s ~/dotfiles/pdbrc .pdbrc
 
 ln -s ~/dotfiles/psqlrc .psqlrc
 
-ln -s ~dotfiles/gitconfig .gitconfig
+ln -s ~/dotfiles/gitconfig .gitconfig
 
 
 ## Setup Oh-My-Zsh Submodule
