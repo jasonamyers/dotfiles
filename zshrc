@@ -21,9 +21,10 @@ export DEFAULT_USER="jasonamyers"
 export PGHOST=localhost
 autoload -U compinit
 compinit
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
-eval "$(pyenv init -)"
+#export PYENV_ROOT="$HOME/.pyenv"
+#export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
+#eval "$(pyenv init -)"
+export PATH="/usr/local/bin:$PATH"
 
 
 
@@ -72,21 +73,21 @@ export SAVEHIST=$HISTSIZE
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
-export PYVER_ROOT=`pyenv prefix`
-export PYVER_BIN="$PYVER_ROOT/bin"
+#export PYVER_ROOT=`pyenv prefix`
+#export PYVER_BIN="$PYVER_ROOT/bin"
 export WORKON_HOME=$HOME/.virtualenv
 export VIRTUALENVWRAPPER_PYTHON=`which python`
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PROJECT_HOME=$HOME/Develop
-if [[ -r $PYVER_BIN/virtualenvwrapper.sh ]]; then
-    source $PYVER_BIN/virtualenvwrapper.sh
+if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+    source /usr/local/bin/virtualenvwrapper.sh
 else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/bin:/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH"
 
 alias tmux="TERM=screen-256color-bce tmux"
 # Set to this to use case-sensitive completion
@@ -111,9 +112,28 @@ plugins=(git, fabric, osx, pip, redis-cli, sublime, tmux)
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/func/color_cmds
 source ~/.nvm/nvm.sh
-nvm use 0.10.26
+nvm use 0.10.29
 # Customize to your needs...
 alias ssh=color-ssh
 alias pmr=color-pmr
 alias pg=color-psql
 function colorcode () { highlight -O rtf $* --font Source\ Code\ Pro --style andes --src-lang python --font-size 36 | pbcopy }
+
+# vvvv ---- Added by Pip Bootstrap ---- vvvv #
+#source "${HOME}/.pip_bootstrap_profile.sh";
+# Configure pip to always do the thing it should do out of the box, and not
+# re-download packages every time I sneeze.
+export STANDARD_CACHE_DIR="${HOME}/Library/Caches/org.pip-installer.pip";
+export WHEELHOUSE="${STANDARD_CACHE_DIR}/Wheelhouse";
+export PIP_USE_WHEEL="yes";
+export PIP_DOWNLOAD_CACHE="${STANDARD_CACHE_DIR}/Downloads";
+export PIP_FIND_LINKS="file://${WHEELHOUSE}";
+export PIP_WHEEL_DIR="${WHEELHOUSE}";
+# ^^^^ ---- Added by Pip Bootstrap ---- ^^^^ #
+
+PERL_MB_OPT="--install_base \"/home/jmyers/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/jmyers/perl5"; export PERL_MM_OPT;
+#### EMMA THINGS ####
+export LOCALEMMA_EMMA_BASE_DIR=~/dev/emma/
+export LOCALEMMA_EMMADMIN_BASE_DIR=~/dev/emmadmin/
+export LOCALEMMA_AUDIENCE_BASE_DIR=~/dev/audience/../

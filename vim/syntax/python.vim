@@ -2,9 +2,9 @@
 " Language:     Python
 " Maintainer:   Dmitry Vasiliev <dima at hlabs dot org>
 " URL:          https://github.com/hdima/python-syntax
-" Last Change:  2013-08-31
+" Last Change:  2013-11-18
 " Filenames:    *.py
-" Version:      3.3.5
+" Version:      3.3.6
 "
 " Based on python.vim (from Vim 6.1 distribution)
 " by Neil Schemenauer <nas at python dot ca>
@@ -25,6 +25,7 @@
 "   Andrea Riciputi
 "   Anton Butanaev
 "   Caleb Adamantine
+"   Elizabeth Myers
 "   Jeroen Ruigrok van der Werven
 "   John Eikenberry
 "   Marc Weber
@@ -76,10 +77,6 @@
 "    python_highlight_file_headers_as_comments
 "                                           Highlight shebang and coding
 "                                           headers as comments
-"    python_highlight_indents               Highlight indents
-"      python_indents_style                 Highlight indents with 5 (default)
-"                                           or 2 colors (valid values for
-"                                           python_indents_style are 1 or 2)
 "
 "    python_highlight_all                   Enable all the options above
 "                                           NOTE: This option don't override
@@ -142,11 +139,6 @@ if s:Enabled("g:python_highlight_all")
   call s:EnableByDefault("g:python_highlight_space_errors")
   call s:EnableByDefault("g:python_highlight_doctests")
   call s:EnableByDefault("g:python_print_as_function")
-  call s:EnableByDefault("g:python_highlight_indents")
-  if s:Enabled("g:python_highlight_indents")
-    " default indents style = 1
-    call s:EnableByDefault("g:python_indents_style")
-  endif
 endif
 
 "
@@ -157,14 +149,17 @@ syn keyword pythonStatement     break continue del
 syn keyword pythonStatement     exec return
 syn keyword pythonStatement     pass raise
 syn keyword pythonStatement     global assert
-syn keyword pythonStatement     lambda yield
+syn keyword pythonStatement     lambda
 syn keyword pythonStatement     with
 syn keyword pythonStatement     def class nextgroup=pythonFunction skipwhite
 syn keyword pythonRepeat        for while
 syn keyword pythonConditional   if elif else
-syn keyword pythonImport        import from
+syn keyword pythonImport        import
 syn keyword pythonException     try except finally
 syn keyword pythonOperator      and in is not or
+
+syn match pythonStatement   "\<yield\>" display
+syn match pythonImport      "\<from\>" display
 
 if s:Python2Syntax()
   if !s:Enabled("g:python_print_as_function")
@@ -174,6 +169,7 @@ if s:Python2Syntax()
   syn match   pythonFunction    "[a-zA-Z_][a-zA-Z0-9_]*" display contained
 else
   syn keyword pythonStatement   as nonlocal None
+  syn match   pythonStatement   "\<yield\s\+from\>" display
   syn keyword pythonBoolean     True False
   syn match   pythonFunction    "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 endif
@@ -215,22 +211,6 @@ endif
 " Trailing space errors
 if s:Enabled("g:python_highlight_space_errors")
   syn match pythonSpaceError	"\s\+$" display
-endif
-
-" Indents highlight
-if s:Enabled("g:python_highlight_indents")
-  " whitespaces (pep8, guys!)
-  syn match   pythonHLSpace     /\(^\ \{4}\)\{1}/
-  for i in range(1, 30)
-    let pattern='/\(\(^\ \{'.i*4.'}\)\)\@<=\(\ \{4}\)\{1}/'
-    exec 'syn match pythonHLSpace'.i pattern
-  endfor
-  " tabs
-  syn match   pythonHLTab    /^\t\{1}/
-  for i in range(1, 30)
-    let pattern='/\(^\t\{'.i.'}\)\@<=\t\{1}/'
-    exec 'syn match pythonHLTab'.i pattern
-  endfor
 endif
 
 "
@@ -565,65 +545,6 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonBuiltinFunc      Function
 
   HiLink pythonExClass          Structure
-
-  " Indents highlight
-  if s:Enabled("g:python_highlight_indents")
-    if (python_indents_style == 1)
-    " 5 colors
-    HiLink pythonHLTab       DiffChange
-    HiLink pythonHLTab1      Cursor
-    HiLink pythonHLTab2      StatusLine
-    HiLink pythonHLTab3      Todo
-    HiLink pythonHLTab4      Visual
-    HiLink pythonHLTab5      DiffChange
-    HiLink pythonHLTab6      Cursor
-    HiLink pythonHLTab7      StatusLine
-    HiLink pythonHLTab8      Todo
-    HiLink pythonHLTab9      Visual
-    HiLink pythonHLTab10     DiffChange
-
-    HiLink pythonHLStab      DiffChange
-    HiLink pythonHLStab1     Cursor
-    HiLink pythonHLStab2     StatusLine
-    HiLink pythonHLStab3     Todo
-    HiLink pythonHLStab4     Visual
-    HiLink pythonHLStab5     DiffChange
-    HiLink pythonHLStab6     Cursor
-    HiLink pythonHLStab7     StatusLine
-    HiLink pythonHLStab8     Todo
-    HiLink pythonHLStab9     Visual
-    HiLink pythonHLStab10    DiffChange
-
-    HiLink pythonHLSpace     DiffChange
-    HiLink pythonHLSpace1    Cursor
-    HiLink pythonHLSpace2    StatusLine
-    HiLink pythonHLSpace3    Todo
-    HiLink pythonHLSpace4    Visual
-    HiLink pythonHLSpace5    DiffChange
-    HiLink pythonHLSpace6    Cursor
-    HiLink pythonHLSpace7    StatusLine
-    HiLink pythonHLSpace8    Todo
-    HiLink pythonHLSpace9    Visual
-    HiLink pythonHLSpace10   DiffChange
-
-    elseif (python_indents_style == 2)
-    " 2 colors
-    HiLink pythonHLSpace     StatusLineNC
-    HiLink pythonHLTab       StatusLineNC
-    for i in range(1, 30)
-      if i % 2 == 0
-        exec 'HiLink pythonHLSpace' .i. ' StatusLineNC'
-        exec 'HiLink pythonHLTab' .i. ' StatusLineNC'
-      else
-        exec 'HiLink pythonHLSpace' .i. ' PmenuSel'
-        exec 'HiLink pythonHLTab' .i. ' PmenuSel'
-      endif
-    endfor
-
-    else
-      echoe "python-syntax: No such indentation style '". python_indents_style ."' - use 1 or 2"
-    endif
-  endif
 
   delcommand HiLink
 endif

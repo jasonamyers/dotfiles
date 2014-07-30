@@ -46,7 +46,7 @@ set t_Co=256                              " Tell The Term To Use 256 Colors
 set visualbell                            " Use Screen Flash Instead Of Beep
 set errorbells                            " Flash Screen For Errors
 set background=dark                       " The power of the Dark Side
-colorscheme solarized                        " Default Color Scheme
+colorscheme jellybeans                    " Default Color Scheme
 set linespace=3                           " A Little Extra Height For Lines:
 
 set showbreak=↪                           " Make Line Wraps More Noticeable:
