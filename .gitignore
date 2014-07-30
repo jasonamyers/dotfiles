@@ -37,3 +37,4 @@ venv/
 viminfo
 tags
 bundle
+virtualenv
