@@ -19,6 +19,7 @@ ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="simple"
 export DEFAULT_USER="jasonamyers"
 export PGHOST=localhost
+export NOSE_REDNOSE=1
 autoload -U compinit
 compinit
 #export PYENV_ROOT="$HOME/.pyenv"
@@ -79,7 +80,7 @@ export WORKON_HOME=$HOME/.virtualenv
 export VIRTUALENVWRAPPER_PYTHON=`which python`
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
-export PROJECT_HOME=$HOME/Develop
+export PROJECT_HOME=$HOME/dev
 if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
     source /usr/local/bin/virtualenvwrapper.sh
 else
