@@ -1,0 +1,4 @@
+pipp() {
+    pip wheel $*;
+    pip install $*;
+}
