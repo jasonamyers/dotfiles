@@ -89,11 +89,17 @@ git clone "git://github.com/tpope/vim-markdown.git"
 # JSHint fork of jslint.vim
 git clone "https://github.com/Shutnik/jshint2.vim"
 
+# Node Support
+git clone "git@github.com:moll/vim-node.git"
+
 # Vastly improved vim's javascript indentation.
-git clone "git://github.com/pangloss/vim-javascript.git"
+git clone "git://github.com/jelera/vim-javascript.git"
 
 # CoffeeScript support for vim
 git clone "git://github.com/kchmck/vim-coffee-script.git"
+
+# Mustache support for vim
+git clone git://github.com/mustache/vim-mode.git
 
 # JSON Highlighting for Vim
 git clone "git://github.com/leshill/vim-json.git"

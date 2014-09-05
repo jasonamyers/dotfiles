@@ -25,7 +25,7 @@
   " Do Not Search Dotfiles:
   let g:ctrlp_dotfiles = 0
 
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+  let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 
   let ctrlp_filter_greps = "".
     \ "egrep -iv '\\.(" .

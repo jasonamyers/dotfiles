@@ -25,7 +25,7 @@ compinit
 #export PYENV_ROOT="$HOME/.pyenv"
 #export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
 #eval "$(pyenv init -)"
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH:$HOME/bin"
 
 
 
@@ -143,3 +143,4 @@ export PATH="$PATH:${HOME}/perl5/bin:${HOME}/perl5/lib/perl5"
 export LOCALEMMA_EMMA_BASE_DIR=~/dev/emma/
 export LOCALEMMA_EMMADMIN_BASE_DIR=~/dev/emmadmin/
 export LOCALEMMA_AUDIENCE_BASE_DIR=~/dev/audience/../
+export XML_CATALOG_FILES=/usr/local/etc/xml/catalog

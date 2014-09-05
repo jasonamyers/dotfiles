@@ -1,3 +1,6 @@
+-- Don't show notices etc
+\set QUIET 1
+
 -- Report time used for each query.
 \timing
 
@@ -18,3 +21,8 @@
 \set PROMPT1 '%[%033[0;36;29m%]%n@%m:%/%[%033[0m%]%# '
 -- \set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
 \pset format wrapped
+
+\set client_min_messages = warning;
+
+\unset quiet
+
