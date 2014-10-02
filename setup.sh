@@ -20,6 +20,7 @@ for file in [a-zA-Z]* ; do
         ln -s `pwd`/"$file" ~/."$file" && echo "  Linked ~/.$file to `pwd`/$file" || echo "  Couldn't link ~/.$file to `pwd`/$file!"
     fi
 done
+./osx-for-hackers.sh
 
 # Init vim bundles
 echo ">> Install vim bundles"

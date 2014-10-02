@@ -25,7 +25,7 @@ compinit
 #export PYENV_ROOT="$HOME/.pyenv"
 #export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
 #eval "$(pyenv init -)"
-export PATH="/usr/local/bin:$PATH:$HOME/bin"
+export PATH="/usr/local/bin:$PATH:$HOME/bin:$HOME/bin/adt/sdk/platform-tools"
 
 
 
