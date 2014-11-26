@@ -9,7 +9,7 @@ if has("autocmd")
   autocmd BufLeave,FocusLost,WinLeave,CmdwinLeave * silent! wall
 
 " Spell Check When Writing Commit Logs:
-  autocmd FileType svn,*commit* setlocal spell
+  autocmd FileType svn,*commit*,asciidoc setlocal spell
 
 " Remove Trailing Whitespace On Save:
   autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
@@ -28,6 +28,7 @@ if has("autocmd")
 
 " Set different tab stops for html files
   autocmd FileType html,htmldjango,xhtml,haml setlocal tabstop=2 shiftwidth=2 softtabstop=2 textwidth=0
+  autocmd FileType asciidoc set wrap
 
 " Automatically chmod +x Shell scripts
   au BufWritePost   *.sh             !chmod +x %

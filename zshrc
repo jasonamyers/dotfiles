@@ -22,8 +22,8 @@ export PGHOST=localhost
 export NOSE_REDNOSE=1
 autoload -U compinit
 compinit
-#export PYENV_ROOT="$HOME/.pyenv"
-#export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
 eval "$(pyenv init -)"
 export PATH="/usr/local/bin:$PATH:$HOME/bin:$HOME/bin/adt/sdk/platform-tools"
 
@@ -74,15 +74,15 @@ export SAVEHIST=$HISTSIZE
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
-#export PYVER_ROOT=`pyenv prefix`
-#export PYVER_BIN="$PYVER_ROOT/bin"
+export PYVER_ROOT=`pyenv prefix`
+export PYVER_BIN="$PYVER_ROOT/bin"
 export WORKON_HOME=$HOME/.virtualenv
 export VIRTUALENVWRAPPER_PYTHON=`which python`
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PROJECT_HOME=$HOME/dev
-if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
-    source /usr/local/bin/virtualenvwrapper.sh
+if [[ -r $PYVER_BIN/virtualenvwrapper.sh ]]; then
+    source $PYVER_BIN/virtualenvwrapper.sh
 else
     echo "WARNING: Can't find virtualenvwrapper.sh"
 fi
