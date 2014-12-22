@@ -98,7 +98,8 @@ set shiftround                            " Round indent by a multiple of shiftw
 set cpoptions+=I                          " Do Not Remove Empty Tabs:
 
 " Line Numbers:
-set nonumber                                " Enable line numbers
+set number                                " Enable line numbers
+set relativenumber                        " Set relative line numbering
 set numberwidth=4                         " Set line number column width
 
 " Window And Buffer Management:

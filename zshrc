@@ -26,8 +26,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
 eval "$(pyenv init -)"
 export PATH="/usr/local/bin:$PATH:$HOME/bin:$HOME/bin/adt/sdk/platform-tools"
-
-
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/go"
 
 alias ls='ls -G'
 alias ll='ls -hlatr --color'
@@ -41,7 +41,7 @@ alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/se
 alias stoppost='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias cleanup='git branch --merged | grep -v master | grep -v "*" | cut -c3- | xargs -I {} git branch -d {}'
 alias glist='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
-
+alias dynamo='/usr/local/bin/dynamodb-local'
 alias pmr='python manage.py runserver'
 alias pmshell='python manage.py shell'
 alias pmdb='python manage.py dbshell'
