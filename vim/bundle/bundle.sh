@@ -133,6 +133,10 @@ git clone "git://github.com/mutewinter/nginx.vim.git"
 # Syntax highlighting for tmux configuration files
 git clone "git://github.com/acustodioo/vim-tmux.git"
 
+# Scala:
+# Syntax highlighting for Scala files
+git clone "git@github.com:derekwyatt/vim-scala.git"
+
 # Themes And Appearance:
 # Colorsheme Scroller, Chooser, and Browser
 git clone "git://github.com/vim-scripts/ScrollColors.git"
