@@ -28,6 +28,8 @@ eval "$(pyenv init -)"
 export PATH="/usr/local/bin:$PATH:$HOME/bin:$HOME/bin/adt/sdk/platform-tools"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
+launchctl setenv GOPATH $GOPATH
+launchctl setenv GOROOT $GOROOT
 
 alias ls='ls -G'
 alias ll='ls -hlatr --color'
