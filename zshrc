@@ -117,7 +117,7 @@ source ~/.zsh/func/color_cmds
 source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
 source ~/.nvm/nvm.sh
-nvm use 0.10
+nvm use 0.12
 # Customize to your needs...
 alias ssh=color-ssh
 alias pmr=color-pmr
@@ -131,7 +131,6 @@ function colorcode () { highlight -O rtf $* --font Source\ Code\ Pro --style and
 export STANDARD_CACHE_DIR="${HOME}/Library/Caches/org.pip-installer.pip";
 export WHEELHOUSE="${STANDARD_CACHE_DIR}/Wheelhouse";
 export PIP_USE_WHEEL="yes";
-export PIP_DOWNLOAD_CACHE="${STANDARD_CACHE_DIR}/Downloads";
 export PIP_FIND_LINKS="file://${WHEELHOUSE}";
 export PIP_WHEEL_DIR="${WHEELHOUSE}";
 # ^^^^ ---- Added by Pip Bootstrap ---- ^^^^ #
