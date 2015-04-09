@@ -1,0 +1,5 @@
+# Gerrit Setup
+run_gerritsetup() {
+    git remote add gerrit `git remote -v | grep -m 1 -o 'ssh://.* '` &&
+    git review -s
+}
