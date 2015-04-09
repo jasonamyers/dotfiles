@@ -15,15 +15,15 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #export ZSH_THEME="agnoster"
-#export ZSH_THEME="kolo"
-export ZSH_THEME="simple"
+export ZSH_THEME="kolo"
+#export ZSH_THEME="simple"
 export DEFAULT_USER="jasonamyers"
 export PGHOST=localhost
 export NOSE_REDNOSE=1
 autoload -U compinit
 compinit
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH:/usr/texbin:$HOME/bin"
+export PATH="$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/usr/texbin:$HOME/bin"
 eval "$(pyenv init -)"
 export PATH="/usr/local/bin:$PATH:$HOME/bin:$HOME/bin/adt/sdk/platform-tools"
 export GOROOT="/usr/local/go"
@@ -41,6 +41,7 @@ alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'
 alias cleanpyc='find . -type f -name "*.pyc" -delete'
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stoppost='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+alias startmongo="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist"
 alias cleanup='git branch --merged | grep -v master | grep -v "*" | cut -c3- | xargs -I {} git branch -d {}'
 alias glist='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
 alias dynamo='/usr/local/bin/dynamodb-local'
@@ -116,12 +117,14 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh/func/color_cmds
 source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
+source ~/.zsh/func/gerritsetup
 source ~/.nvm/nvm.sh
 nvm use 0.10
 # Customize to your needs...
 alias ssh=color-ssh
 alias pmr=color-pmr
 alias pg=color-psql
+alias gerritsetup=run_gerritsetup
 function colorcode () { highlight -O rtf $* --font Source\ Code\ Pro --style andes --src-lang python --font-size 36 | pbcopy }
 
 # vvvv ---- Added by Pip Bootstrap ---- vvvv #
@@ -131,7 +134,6 @@ function colorcode () { highlight -O rtf $* --font Source\ Code\ Pro --style and
 export STANDARD_CACHE_DIR="${HOME}/Library/Caches/org.pip-installer.pip";
 export WHEELHOUSE="${STANDARD_CACHE_DIR}/Wheelhouse";
 export PIP_USE_WHEEL="yes";
-export PIP_DOWNLOAD_CACHE="${STANDARD_CACHE_DIR}/Downloads";
 export PIP_FIND_LINKS="file://${WHEELHOUSE}";
 export PIP_WHEEL_DIR="${WHEELHOUSE}";
 # ^^^^ ---- Added by Pip Bootstrap ---- ^^^^ #
@@ -146,3 +148,4 @@ export LOCALEMMA_EMMA_BASE_DIR=~/dev/emma/
 export LOCALEMMA_EMMADMIN_BASE_DIR=~/dev/emmadmin/
 export LOCALEMMA_AUDIENCE_BASE_DIR=~/dev/audience/../
 export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
+eval "$(rbenv init -)"

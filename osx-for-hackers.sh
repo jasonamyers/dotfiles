@@ -30,7 +30,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/Battery.menu" \
   "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+sudo chmod 755 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 
 echo ""
 echo "Disabling OS X Gate Keeper"

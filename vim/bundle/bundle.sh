@@ -81,6 +81,9 @@ git clone "git://github.com/alfredodeza/pytest.vim.git"
 # JEDI support
 git clone "git@github.com:davidhalter/jedi-vim.git"
 
+# PEP8 Indent
+git clone "https://github.com/hynek/vim-python-pep8-indent.git"
+
 # Markdown:
 # Vim Markdown runtime files
 git clone "git://github.com/tpope/vim-markdown.git"

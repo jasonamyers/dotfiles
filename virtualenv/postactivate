@@ -4,4 +4,3 @@ PS1="$_OLD_VIRTUAL_PS1"
 _OLD_RPROMPT="$RPROMPT"
 RPROMPT="%{${fg_bold[white]}%}(env: %{${fg[green]}%}`basename \"$VIRTUAL_ENV\"`%{${fg_bold[white]}%})%{${reset_color}%} $RPROMPT"
 proj_name=$(echo $VIRTUAL_ENV|awk -F'/' '{print $NF}')
-cd ~/dev/$proj_name
