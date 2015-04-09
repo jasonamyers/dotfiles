@@ -119,7 +119,7 @@ source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
 source ~/.zsh/func/gerritsetup
 source ~/.nvm/nvm.sh
-nvm use 0.10
+nvm use 0.12
 # Customize to your needs...
 alias ssh=color-ssh
 alias pmr=color-pmr
