@@ -111,7 +111,7 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git, fabric, osx, pip, redis-cli, sublime, tmux, sbt, scala, git-extras, virtualenvwrapper, pyenv, brew)
+plugins=(git, fabric, osx, pip, redis-cli, tmux, git-extras, virtualenvwrapper, pyenv, brew)
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/func/color_cmds
