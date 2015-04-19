@@ -14,8 +14,8 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="agnoster"
-#export ZSH_THEME="kolo"
+#export ZSH_THEME="agnoster"
+export ZSH_THEME="kolo"
 #export ZSH_THEME="simple"
 export DEFAULT_USER="jasonamyers"
 export PGHOST=localhost
@@ -148,4 +148,4 @@ export LOCALEMMA_EMMA_BASE_DIR=~/dev/emma/
 export LOCALEMMA_EMMADMIN_BASE_DIR=~/dev/emmadmin/
 export LOCALEMMA_AUDIENCE_BASE_DIR=~/dev/audience/../
 export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
