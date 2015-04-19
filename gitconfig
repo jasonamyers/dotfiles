@@ -16,3 +16,7 @@
 	default = simple
 [init]
 	templatedir = ~/.git_template
+[http]
+	sslVerify = false
+[gitreview]
+	username = jasonamyers

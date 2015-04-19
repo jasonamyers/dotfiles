@@ -62,7 +62,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # General UI/UX
 ###############################################################################
 
-echo ""
 echo "Would you like to set your computer name (as done via System Preferences >> Sharing)?  (y/n)"
 read -r response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
