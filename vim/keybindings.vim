@@ -56,6 +56,12 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
+" Easier split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " Disable Arrow Keys For Criminies:
 "inoremap <Up> <NOP>
 "inoremap <Down> <NOP>
@@ -76,3 +82,9 @@ vnoremap gl :<C-u>call g:PersonalVim_GoogleOperator(visualmode())<CR>
 " This rewires n and N to do the highlighing:
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" Ctrl-P tag search
+nnoremap <leader>. :CtrlPTag<cr>

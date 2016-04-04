@@ -24,6 +24,7 @@ Plugin 'tpope/vim-unimpaired.git'
 
 " Adds status bar to Vim
 Plugin 'bling/vim-airline.git'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Tagging:
 
@@ -82,13 +83,22 @@ Plugin 'scrooloose/nerdcommenter.git'
 
 " Python:
 " Python Mode
-Plugin 'klen/python-mode'
+"Plugin 'klen/python-mode'
+
+" Python indentation
+Plugin 'hynek/vim-python-pep8-indent'
 
 " PyTest Support
 Plugin 'alfredodeza/pytest.vim.git'
 
 " JEDI support
 Plugin 'davidhalter/jedi-vim.git'
+
+" Better folding support
+Plugin 'tmhedberg/SimpylFold'
+
+" Flake8 Checking
+Plugin 'nvie/vim-flake8'
 
 " Markdown:
 " Vim Markdown runtime files
@@ -102,7 +112,7 @@ Plugin 'Shutnik/jshint2.vim'
 Plugin 'moll/vim-node.git'
 
 " Vastly improved vim's javascript indentation.
-Plugin 'jelera/vim-javascript.git'
+Plugin 'jelera/vim-javascript-syntax.git'
 
 " CoffeeScript support for vim
 Plugin 'kchmck/vim-coffee-script.git'
@@ -146,6 +156,10 @@ Plugin 'acustodioo/vim-tmux.git'
 " Syntax highlighting for Scala files
 Plugin 'derekwyatt/vim-scala.git'
 
+" Elixir:
+" Syntax highlighting for Elixir riles
+Plugin 'elixir-lang/vim-elixir'
+
 " Themes And Appearance:
 " Colorsheme Scroller, Chooser, and Browser
 Plugin 'vim-scripts/ScrollColors.git'
@@ -164,6 +178,9 @@ Plugin 'chriskempson/base16-vim'
 
 " More colorschemes
 Plugin 'daylerees/colour-schemes'
+
+" Papercolor theme
+Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()
 filetype plugin indent on

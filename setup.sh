@@ -26,9 +26,3 @@ done
 echo ">> Install vim bundles"
 cd ~/.vim/bundle/
 ./bundles.sh
-
-echo ">> Install Emacs config"
-curl -L https://github.com/jasonamyers/prelude/raw/master/utils/installer.sh | sh
-
-echo "Remember to run M-x jedi:install-server in Emacs"
-

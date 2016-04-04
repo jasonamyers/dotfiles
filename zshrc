@@ -22,9 +22,7 @@ export PGHOST=localhost
 export NOSE_REDNOSE=1
 autoload -U compinit
 compinit
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$HOME/.rbenv/bin:$PATH:/usr/texbin:$HOME/bin"
-eval "$(pyenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH:/usr/texbin:$HOME/bin"
 export PATH="/usr/local/bin:$PATH:$HOME/bin:$HOME/bin/adt/sdk/platform-tools"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
@@ -77,18 +75,16 @@ export SAVEHIST=$HISTSIZE
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
-export PYVER_ROOT=`pyenv prefix`
-export PYVER_BIN="$PYVER_ROOT/bin"
-export WORKON_HOME=$HOME/.virtualenv
-export VIRTUALENVWRAPPER_PYTHON=`which python`
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+pyenv virtualenvwrapper
+export PATH="$HOME/.rbenv/bin:$PATH"
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PROJECT_HOME=$HOME/dev
-if [[ -r $PYVER_BIN/virtualenvwrapper.sh ]]; then
-    source $PYVER_BIN/virtualenvwrapper.sh
-else
-    echo "WARNING: Can't find virtualenvwrapper.sh"
-fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -111,14 +107,15 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(git, fabric, osx, pip, redis-cli, tmux, git-extras, virtualenvwrapper, pyenv, brew)
-plugins=()
+plugins=(git, fabric, osx, pip, redis-cli, tmux, git-extras, virtualenvwrapper, pyenv, brew)
+#plugins=()
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh/func/color_cmds
 source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
 source ~/.zsh/func/gerritsetup
+source /usr/local/Cellar/pyenv/20160310/completions/pyenv.zsh
 #source ~/.nvm/nvm.sh
 #nvm use 0.12
 # Customize to your needs...
@@ -127,26 +124,3 @@ alias pmr=color-pmr
 alias pg=color-psql
 alias gerritsetup=run_gerritsetup
 function colorcode () { highlight -O rtf $* --font Source\ Code\ Pro --style andes --src-lang python --font-size 36 | pbcopy }
-
-# vvvv ---- Added by Pip Bootstrap ---- vvvv #
-#source "${HOME}/.pip_bootstrap_profile.sh";
-# Configure pip to always do the thing it should do out of the box, and not
-# re-download packages every time I sneeze.
-export STANDARD_CACHE_DIR="${HOME}/Library/Caches/org.pip-installer.pip";
-export WHEELHOUSE="${STANDARD_CACHE_DIR}/Wheelhouse";
-export PIP_USE_WHEEL="yes";
-export PIP_FIND_LINKS="file://${WHEELHOUSE}";
-export PIP_WHEEL_DIR="${WHEELHOUSE}";
-# ^^^^ ---- Added by Pip Bootstrap ---- ^^^^ #
-
-export PERL_MB_OPT="--install_base \"${HOME}/perl5\""
-export PERL_MM_OPT="INSTALL_BASE=${HOME}/perl5"
-export PERL5LIB="${HOME}/perl5/lib/perl5"
-
-export PATH="$PATH:${HOME}/perl5/bin:${HOME}/perl5/lib/perl5"
-#### EMMA THINGS ####
-export LOCALEMMA_EMMA_BASE_DIR=~/dev/emma/
-export LOCALEMMA_EMMADMIN_BASE_DIR=~/dev/emmadmin/
-export LOCALEMMA_AUDIENCE_BASE_DIR=~/dev/audience/../
-export XML_CATALOG_FILES=/usr/local/etc/xml/catalog
-#eval "$(rbenv init -)"

@@ -46,7 +46,7 @@ set t_Co=256                              " Tell The Term To Use 256 Colors
 set visualbell                            " Use Screen Flash Instead Of Beep
 set errorbells                            " Flash Screen For Errors
 set background=dark                       " The power of the Dark Side
-colorscheme euphrasia                     " Default Color Scheme
+colorscheme jellybeans                     " Default Color Scheme
 set linespace=3                           " A Little Extra Height For Lines:
 
 set showbreak=↪                           " Make Line Wraps More Noticeable:
@@ -72,9 +72,9 @@ set formatoptions+=1                      " Break before 1-letter words
 set textwidth=80                          " Set Where Text Should Auto-Wrap
 
 " Folding:
-set foldmethod=indent                     " Fold based on indenting by default
-set foldlevelstart=99                     " Don't autofold anything (but still able to fold manually)
-set foldlevel=100                         " Don't autofold anything (but still able to fold manually)
+"set foldmethod=indent                     " Fold based on indenting by default
+"set foldlevelstart=99                     " Don't autofold anything (but still able to fold manually)
+"set foldlevel=100                         " Don't autofold anything (but still able to fold manually)
 
 " Mouse:
 "set nomousefocus                          " Don't focus the window when the mouse pointer is moved.
