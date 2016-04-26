@@ -1,0 +1,12 @@
+" python3 plugins
+call remote#host#RegisterPlugin('python3', '/Users/jasonmyers/.cache/vimfiles/repos/github.com/Shougo/deoplete.nvim/rplugin/python3/deoplete', [
+      \ {'sync': 1, 'name': '_deoplete', 'type': 'function', 'opts': {}},
+     \ ])
+
+
+" ruby plugins
+
+
+" python plugins
+
+

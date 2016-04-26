@@ -88,3 +88,6 @@ nnoremap <space> za
 
 " Ctrl-P tag search
 nnoremap <leader>. :CtrlPTag<cr>
+
+" PyTest
+nnoremap <leader>b :Pytest project looponfail<cr>

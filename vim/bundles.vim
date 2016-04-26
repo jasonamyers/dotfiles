@@ -91,6 +91,9 @@ Plugin 'hynek/vim-python-pep8-indent'
 " PyTest Support
 Plugin 'alfredodeza/pytest.vim.git'
 
+" Coveragepy Support
+Plugin 'alfredodeza/coveragepy.vim.git'
+
 " JEDI support
 Plugin 'davidhalter/jedi-vim.git'
 
@@ -181,6 +184,12 @@ Plugin 'daylerees/colour-schemes'
 
 " Papercolor theme
 Plugin 'NLKNguyen/papercolor-theme'
+
+" Colors-Pencil theme
+Plugin 'reedes/vim-colors-pencil'
+
+" Hybird Color Scheme
+Plugin 'w0ng/vim-hybrid'
 
 call vundle#end()
 filetype plugin indent on
