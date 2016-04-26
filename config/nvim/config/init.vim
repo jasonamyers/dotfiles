@@ -89,7 +89,7 @@ let mapleader                          = ','
 let g:settings.plugin_groups = []
 call add(g:settings.plugin_groups, 'web')
 call add(g:settings.plugin_groups, 'javascript')
-call add(g:settings.plugin_groups, 'ruby')
+"call add(g:settings.plugin_groups, 'ruby')
 call add(g:settings.plugin_groups, 'python')
 "call add(g:settings.plugin_groups, 'scala')
 "call add(g:settings.plugin_groups, 'go')

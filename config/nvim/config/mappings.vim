@@ -159,6 +159,9 @@ vnoremap <Leader>d YPgv
 vnoremap <Leader>S y:execute @@<CR>:echo 'Sourced selection.'<CR>
 nnoremap <Leader>S ^vg_y:execute @@<CR>:echo 'Sourced line.'<CR>
 
+noremap <silent><leader>c :Neomake<CR>
+
+
 call zvim#util#defineMap('nnoremap <silent>', '<C-c>', ':let @+=expand("%:p")<CR>:echo "Copied to clipboard."<CR>',
             \ 'Copy buffer absolute path to X11 clipboard',':let @+=expand("%:p")|echo "Copied to clipboard."')
 call zvim#util#defineMap('nnoremap <silent>', '<Leader><C-c>',
