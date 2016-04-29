@@ -38,3 +38,12 @@ viminfo
 tags
 bundle
 virtualenv
+
+.nvim_bkp
+.dein
+merged
+repos
+rollbacks
+temp
+tmp
+.init.vim-rplugin~
