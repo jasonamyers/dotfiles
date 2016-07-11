@@ -11,6 +11,7 @@ alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'
 alias cleanpyc='find . -type f -name "*.pyc" -delete'
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stoppost='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+alias vim='nvim'
 
 alias pms='python manage.py runserver'
 alias pmsh='python manage.py shell'
@@ -71,3 +72,6 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 export NVM_DIR="/Users/jmyers/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# added by travis gem
+[ -f /Users/jasonmyers/.travis/travis.sh ] && source /Users/jasonmyers/.travis/travis.sh

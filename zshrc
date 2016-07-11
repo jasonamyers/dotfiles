@@ -14,11 +14,14 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#export ZSH_THEME="agnoster"
+export ZSH_THEME="solarized-powerline"
 #export ZSH_THEME="kolo"
-export ZSH_THEME="crunch"
+#export ZSH_THEME="crunch"
 #export ZSH_THEME="simple"
-export DEFAULT_USER="jasonamyers"
+export DEFAULT_USER="jasonmyers"
+export ZSH_POWERLINE_SHOW_USER="false"
+export ZSH_POWERLINE_SHOW_IP="false"
+export ZSH_POWERLINE_SINGLE_LINE="true"
 export PGHOST=localhost
 export NOSE_REDNOSE=1
 autoload -U compinit
@@ -108,7 +111,7 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git, fabric, osx, pip, redis-cli, tmux, git-extras, virtualenvwrapper, pyenv, brew)
+plugins=(git, fabric, osx, pip, redis-cli, tmux, git-extras, virtualenvwrapper, pyenv, brew, zsh-autosuggestions)
 #plugins=()
 
 source $ZSH/oh-my-zsh.sh
@@ -125,3 +128,6 @@ alias pmr=color-pmr
 alias pg=color-psql
 alias gerritsetup=run_gerritsetup
 function colorcode () { highlight -O rtf $* --font Source\ Code\ Pro --style andes --src-lang python --font-size 36 | pbcopy }
+
+# added by travis gem
+[ -f /Users/jasonmyers/.travis/travis.sh ] && source /Users/jasonmyers/.travis/travis.sh
