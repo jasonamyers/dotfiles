@@ -425,6 +425,20 @@ nnoremap ,? ?<CR>
 " Faster sort
 vnoremap ,s :!sort<CR>
 
+" Move Around Via Methods
+nmap <silent> } }zzzv
+nmap <silent> { {zzzv
+
+" Mimic Unimpaired Style For Navigating Tabs
+noremap <silent>[r :bp<CR>
+noremap <silent>]r :bn<CR>
+noremap <silent>[R <C-O>:bfirst<CR>
+noremap <silent>]R <C-O>:blast<CR>
+
+" Mimic Unimpaired Style For Navigating Cursor History
+nnoremap <silent>[i <C-O>
+nnoremap <silent>]i <C-I>
+
 " F-key actions
 " -----------------------------------------------------
 
@@ -872,10 +886,10 @@ set background=dark
 
 " Color scheme based on time
 if strftime("%H") < 15
-  colorscheme gruvbox
+  colorscheme janah
 else
   let g:rehash256=1
-  colorscheme hybrid
+  colorscheme yowish
 endif
 
 " Highlight VCS conflict markers
