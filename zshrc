@@ -14,8 +14,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="solarized-powerline"
-#export ZSH_THEME="kolo"
+export ZSH_THEME="dracula"
 #export ZSH_THEME="crunch"
 #export ZSH_THEME="simple"
 export DEFAULT_USER="jasonmyers"
@@ -38,7 +37,7 @@ alias ll='ls -hlatr --color'
 alias lf="ls -l | egrep -v '^d'"
 alias ldir="ls -l | egrep '^d'"
 alias gg='history | grep'
-#alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
+alias vim='nvim'
 alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
 alias cleanpyc='find . -type f -name "*.pyc" -delete'
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
@@ -119,7 +118,6 @@ source ~/.zsh/func/color_cmds
 source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
 source ~/.zsh/func/gerritsetup
-source /usr/local/Cellar/pyenv/20160310/completions/pyenv.zsh
 #source ~/.nvm/nvm.sh
 #nvm use 0.12
 # Customize to your needs...

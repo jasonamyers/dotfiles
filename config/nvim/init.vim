@@ -22,8 +22,6 @@ call dein#add('benekastah/neomake')
 call dein#add('Shougo/deoplete.nvim')
 " Automatically closing pair stuff
 call dein#add('cohama/lexima.vim')
-" Snippet support (C-j)
-call dein#add('SirVer/ultisnips')
 " Commenting support (gc)
 call dein#add('tpope/vim-commentary')
 " CamelCase and snake_case motions
@@ -78,10 +76,10 @@ call dein#add('martin-svk/vim-yaml')
 call dein#add('tpope/vim-markdown')
 " Git syntax
 call dein#add('tpope/vim-git')
-" Tmux syntax
-call dein#add('tejr/vim-tmux')
 " Dockerfile
 call dein#add('honza/dockerfile.vim')
+" Terraform
+call dein#add('hashivim/vim-terraform')
 
 " Unite fuzzy searcher
 " ------------------------------------------------------------
@@ -234,7 +232,7 @@ set nohlsearch                              " Don't highlight after search
 " ----------------------------------------------------------
 if has('persistent_undo')
   set undofile
-  set undodir=~/.config/nvim/tmp/undo//
+  set undodir=~/.config/nvim/tmp/undo/
 endif
 
 " White characters settings
@@ -613,10 +611,6 @@ let g:NERDTreeShowHidden=1
 let g:NERDTreeHighlightCursorline=0
 let g:NERDTreeRespectWildIgnore=1
 
-" Ultisnips settings
-" -----------------------------------------------------
-let g:UltiSnipsUsePythonVersion=3
-
 " Gitgutter settings
 " -----------------------------------------------------
 let g:gitgutter_map_keys=0
@@ -709,13 +703,13 @@ let g:deoplete#auto_complete_start_length=5
 let g:deoplete#file#enable_buffer_path=1
 
 let g:deoplete#sources={}
-let g:deoplete#sources._    = ['buffer', 'file', 'ultisnips']
-let g:deoplete#sources.ruby = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.vim  = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file', 'ultisnips']
-let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni', 'ultisnips']
-let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni', 'ultisnips']
+let g:deoplete#sources._    = ['buffer', 'file']
+let g:deoplete#sources.ruby = ['buffer', 'member', 'file']
+let g:deoplete#sources.vim  = ['buffer', 'member', 'file']
+let g:deoplete#sources['javascript.jsx'] = ['buffer', 'member', 'file']
+let g:deoplete#sources.css  = ['buffer', 'member', 'file', 'omni']
+let g:deoplete#sources.scss = ['buffer', 'member', 'file', 'omni']
+let g:deoplete#sources.html = ['buffer', 'member', 'file', 'omni']
 
 " Ctrl-SF settings
 " -----------------------------------------------------
@@ -774,8 +768,6 @@ nnoremap <silent> <leader>y :call utils#uniteYankHistory()<CR>
 nnoremap <silent> <leader>r :call utils#uniteRegisters()<CR>
 " Search in opened [w]indow splits
 nnoremap <silent> <leader>w :call utils#uniteWindows()<CR>
-" Search in ultisnips [s]nippets
-nnoremap <silent> <leader>s :call utils#uniteSnippets()<CR>
 " Search in latest [j]ump positions
 nnoremap <silent> <leader>j :call utils#uniteJumps()<CR>
 " Search in my custom unite [m]enu with my commands
@@ -784,15 +776,6 @@ nnoremap <silent> <leader>m :call utils#uniteCustomMenu()<CR>
 nnoremap <silent> <leader>hc :call utils#uniteCommands()<CR>
 " Seach in help menu for mappings
 nnoremap <silent> <leader>hm :call utils#uniteMappings()<CR>
-
-" Ultisnips
-" -----------------------------------------------------
-" Disable built-in cx-ck to be able to go backward
-inoremap <C-x><C-k> <NOP>
-let g:UltiSnipsExpandTrigger='<C-j>'
-let g:UltiSnipsListSnippets='<C-l>'
-let g:UltiSnipsJumpForwardTrigger='<C-j>'
-let g:UltiSnipsJumpBackwardTrigger='<C-k>'
 
 " Isolate
 " -----------------------------------------------------
@@ -889,7 +872,7 @@ if strftime("%H") < 15
   colorscheme janah
 else
   let g:rehash256=1
-  colorscheme yowish
+  colorscheme janah
 endif
 
 " Highlight VCS conflict markers
