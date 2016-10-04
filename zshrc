@@ -2,7 +2,7 @@
 setopt PROMPT_SUBST
 autoload -U promptinit
 promptinit
-#prompt grb
+prompt grp
 # unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/helpfiles
@@ -10,13 +10,6 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-export ZSH_THEME="dracula"
-#export ZSH_THEME="crunch"
-#export ZSH_THEME="simple"
 export DEFAULT_USER="jasonmyers"
 export ZSH_POWERLINE_SHOW_USER="false"
 export ZSH_POWERLINE_SHOW_IP="false"
@@ -24,20 +17,13 @@ export ZSH_POWERLINE_SINGLE_LINE="true"
 export PGHOST=localhost
 export NOSE_REDNOSE=1
 autoload -U compinit
-compinit
-export PATH="$HOME/.rbenv/bin:$PATH:/usr/texbin:$HOME/bin"
-export PATH="/usr/local/bin:$PATH:$HOME/bin:$HOME/bin/adt/sdk/platform-tools"
-export GOROOT="/usr/local/go"
-export GOPATH="$HOME/go"
-launchctl setenv GOPATH $GOPATH
-launchctl setenv GOROOT $GOROOT
+compinit -u
 
 alias ls='ls -G'
 alias ll='ls -hlatr --color'
 alias lf="ls -l | egrep -v '^d'"
 alias ldir="ls -l | egrep '^d'"
 alias gg='history | grep'
-alias vim='nvim'
 alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"
 alias cleanpyc='find . -type f -name "*.pyc" -delete'
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
@@ -45,12 +31,9 @@ alias stoppost='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias startmongo="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist"
 alias cleanup='git branch --merged | grep -v master | grep -v "*" | cut -c3- | xargs -I {} git branch -d {}'
 alias glist='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
-alias dynamo='/usr/local/bin/dynamodb-local'
 alias pmr='python manage.py runserver'
 alias pmshell='python manage.py shell'
 alias pmdb='python manage.py dbshell'
-alias work='workon health;cd health'
-alias startwork='startpost; startred;workon health;cd health'
 alias md='mkdir -p'
 alias rd='rmdir'
 alias d='dirs -v'
@@ -65,6 +48,11 @@ alias gco='git checkout'
 alias gb='git branch'
 alias gba='git branch -a'
 alias gbd='git branch -d'
+alias fruitionwork='tmuxinator start fruition'
+alias infrawork='tmuxinator start infrastructure'
+alias cataloguework='tmuxinator start fruition'
+alias juicecliwork='tmuxinator start juicecli'
+alias juicepublicwork='tmuxinator start juicepublicapi'
 alias startred='redis-server /usr/local/etc/redis.conf &'
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
@@ -110,14 +98,14 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git, fabric, osx, pip, redis-cli, tmux, git-extras, virtualenvwrapper, pyenv, brew, zsh-autosuggestions)
-#plugins=()
 
-source $ZSH/oh-my-zsh.sh
+export ACK_COLOR_MATCH='red'
+
 source ~/.zsh/func/color_cmds
 source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
 source ~/.zsh/func/gerritsetup
+source ~/.zsh/func/dinspect
 #source ~/.nvm/nvm.sh
 #nvm use 0.12
 # Customize to your needs...
@@ -126,6 +114,11 @@ alias pmr=color-pmr
 alias pg=color-psql
 alias gerritsetup=run_gerritsetup
 function colorcode () { highlight -O rtf $* --font Source\ Code\ Pro --style andes --src-lang python --font-size 36 | pbcopy }
+alias dinspect=docker_inspect_name
 
 # added by travis gem
 [ -f /Users/jasonmyers/.travis/travis.sh ] && source /Users/jasonmyers/.travis/travis.sh
+
+# Handle keybinding issues
+bindkey -e
+bindkey '^R' history-incremental-search-backward

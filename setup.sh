@@ -1,7 +1,4 @@
 #!/bin/bash
-echo ">> Initialising git submodules"
-git submodule init
-git submodule update
 
 # Init symlinks for config files
 echo -e "\n>> Creating symlinks"
@@ -24,5 +21,5 @@ done
 
 # Init vim bundles
 echo ">> Install vim bundles"
-cd ~/.vim/bundle/
-./bundles.sh
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
