@@ -9,6 +9,7 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="simple"
 
 export DEFAULT_USER="jasonmyers"
 export ZSH_POWERLINE_SHOW_USER="false"
@@ -67,6 +68,7 @@ export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH=$PATH:/Library/TeX/texbin
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
@@ -106,6 +108,9 @@ source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
 source ~/.zsh/func/gerritsetup
 source ~/.zsh/func/dinspect
+plugins=()
+
+source $ZSH/oh-my-zsh.sh
 #source ~/.nvm/nvm.sh
 #nvm use 0.12
 # Customize to your needs...
