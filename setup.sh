@@ -24,5 +24,4 @@ done
 
 # Init vim bundles
 echo ">> Install vim bundles"
-cd ~/.vim/bundle/
-./bundles.sh
+vim +PluginInstall +qall
