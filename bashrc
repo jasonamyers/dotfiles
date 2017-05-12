@@ -11,7 +11,6 @@ alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'
 alias cleanpyc='find . -type f -name "*.pyc" -delete'
 alias startpost='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias stoppost='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-alias vim='nvim'
 
 alias pms='python manage.py runserver'
 alias pmsh='python manage.py shell'
@@ -54,7 +53,7 @@ export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
 
 export WORKON_HOME=$HOME/.virtualenv
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.3/bin/python
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.13/bin/python
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 export PROJECT_HOME=$HOME/Develop
@@ -75,3 +74,7 @@ export NVM_DIR="/Users/jmyers/.nvm"
 
 # added by travis gem
 [ -f /Users/jasonmyers/.travis/travis.sh ] && source /Users/jasonmyers/.travis/travis.sh
+
+source /Users/jasonamyers/functions.sh
+source /Users/jasonamyers/liquidprompt/liquidprompt
+prompt_tag $PORTRAY_PROMPT

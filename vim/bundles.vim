@@ -163,6 +163,10 @@ Plugin 'derekwyatt/vim-scala.git'
 " Syntax highlighting for Elixir riles
 Plugin 'elixir-lang/vim-elixir'
 
+" Hashicorp:
+" Syntax highlighting and more for HCL
+Plugin 'hashivim/vim-hashicorp-tools'
+
 " Themes And Appearance:
 " Colorsheme Scroller, Chooser, and Browser
 Plugin 'vim-scripts/ScrollColors.git'

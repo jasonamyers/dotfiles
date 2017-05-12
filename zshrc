@@ -69,16 +69,16 @@ export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
 export PATH=$PATH:$HOME/.local/bin:$HOME/bin
 export PATH=$PATH:/Library/TeX/texbin
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-pyenv virtualenvwrapper
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
-export PROJECT_HOME=$HOME/dev
-
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+# pyenv virtualenvwrapper
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# export PIP_VIRTUALENV_BASE=$WORKON_HOME
+# export PIP_RESPECT_VIRTUALENV=true
+# export PROJECT_HOME=$HOME/dev
+#
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
@@ -107,6 +107,7 @@ source ~/.zsh/func/color_cmds
 source ~/.zsh/func/pipp
 source ~/.zsh/func/somafm
 source ~/.zsh/func/gerritsetup
+source ~/.zsh/func/get_mfa_session
 source ~/.zsh/func/dinspect
 plugins=()
 

@@ -1,0 +1,155 @@
+get_mfa_session() {
+  # Make sure we're not inheriting from the parent shell
+  unset AWS_ACCESS_KEY_ID
+  unset AWS_SECRET_ACCESS_KEY
+  unset AWS_SESSION_TOKEN
+  unset AWS_ROLE_ARN AWS_ROLE_EXPIRATION AWS_ROLE_ASSUMED_ROLE_ID
+
+  TOKEN_CODE=$1
+  if [ "$2" != "" ]; then
+    MFA_SERIAL_NUMBER=$2
+  fi
+  DURATION_SECONDS=43200
+
+  SESSION_FILE=~/.aws/skrips/cache/${AWS_PROFILE:-default}--$(echo $MFA_SERIAL_NUMBER | sed 's/:/_/g' | sed 's/\//--/').json
+
+  if sts_session_is_valid $SESSION_FILE; then
+    # Grab the temporary credentials from the session file
+    SESSION_AWS_ACCESS_KEY_ID="$(jq -r '.Credentials.AccessKeyId' $SESSION_FILE)"
+    SESSION_AWS_SECRET_ACCESS_KEY="$(jq -r '.Credentials.SecretAccessKey' $SESSION_FILE)"
+    SESSION_AWS_SESSION_TOKEN="$(jq -r '.Credentials.SessionToken' $SESSION_FILE)"
+    unset AWS_PROFILE
+    export AWS_ACCESS_KEY_ID=$SESSION_AWS_ACCESS_KEY_ID
+    export AWS_SECRET_ACCESS_KEY=$SESSION_AWS_SECRET_ACCESS_KEY
+    export AWS_SESSION_TOKEN=$SESSION_AWS_SESSION_TOKEN
+  else
+    # use $AWS_PROFILE or default
+    if [ -z "$AWS_PROFILE" ]; then
+      echo "\$AWS_PROFILE is not set. Using the default."
+    else
+      echo "Using profile $AWS_PROFILE"
+    fi
+
+    # If the MFA serial number wasn't passed, prompt
+    if [ -z "$MFA_SERIAL_NUMBER" ]; then
+      read -p "MFA Device ARN: " MFA_SERIAL_NUMBER
+    fi
+
+    echo "Using MFA device $MFA_SERIAL_NUMBER"
+
+    # If the token wasn't passed in, prompt for it
+    if [ -z "$TOKEN_CODE" ]; then
+      read -p "MFA Token: " TOKEN_CODE
+    fi
+
+    # Get a new set of temporary credentials
+    aws sts get-session-token \
+      --serial-number "$MFA_SERIAL_NUMBER" \
+      --token-code "$TOKEN_CODE" \
+      --duration-seconds "$DURATION_SECONDS" > $SESSION_FILE
+
+    # Grab the temporary credentials from the session file
+    SESSION_AWS_ACCESS_KEY_ID="$(jq -r '.Credentials.AccessKeyId' $SESSION_FILE)"
+    SESSION_AWS_SECRET_ACCESS_KEY="$(jq -r '.Credentials.SecretAccessKey' $SESSION_FILE)"
+    SESSION_AWS_SESSION_TOKEN="$(jq -r '.Credentials.SessionToken' $SESSION_FILE)"
+    unset AWS_PROFILE
+    export AWS_ACCESS_KEY_ID=$SESSION_AWS_ACCESS_KEY_ID
+    export AWS_SECRET_ACCESS_KEY=$SESSION_AWS_SECRET_ACCESS_KEY
+    export AWS_SESSION_TOKEN=$SESSION_AWS_SESSION_TOKEN
+  fi
+}
+
+sts_session_is_valid() {
+  SESSION_FILE=$1
+  if [ -f "$SESSION_FILE" ]; then
+    # Return false if file is not valide JSON
+    jq '.' $SESSION_FILE >/dev/null 2>&1
+
+    if [ $? -ne 0 ]; then
+      echo "File is not valid JSON. Removing."
+      rm $SESSION_FILE
+      return 1
+    else
+      # Grab the session expiration timestamp and convert to UNIX time
+      SESSION_EXPIRATION="$(jq -r '.Credentials.Expiration' $SESSION_FILE | sed 's/Z$/-0000/')"
+      SESSION_EXPIRATION_EPOCH=$(date -j -f "%Y-%m-%dT%H:%M:%S%z" $SESSION_EXPIRATION "+%s")
+      CURRENT_EPOCH=$(date "+%s")
+
+      # Is the current session good?
+      if [ "$CURRENT_EPOCH" -lt "$SESSION_EXPIRATION_EPOCH" ]; then
+        echo "Reusing valid session until $SESSION_EXPIRATION"
+        return 0
+      else
+        echo "Session is expired. Removing."
+        rm $SESSION_FILE
+        return 1
+      fi
+    fi
+  else
+    echo "Session cache does not exist"
+    return 1
+  fi
+}
+
+assume_role() {
+  # Make sure we're not inheriting from the parent shell
+  unset AWS_ROLE AWS_ROLE_SESSION_NAME
+
+  ROLE_ARN=$1
+
+  # If the role ARN wasn't passed, prompt
+  if [ -z "$ROLE_ARN" ]; then
+    read -p "Role ARN: " ROLE_ARN
+  fi
+
+  ROLE_FILE=~/.aws/skrips/cache/assume_role--$(echo $ROLE_ARN | sed 's/:/_/g' | sed 's/\//--/').json
+
+  if sts_session_is_valid $ROLE_FILE; then
+    # Grab the temporary credentials from the session file
+    ROLE_AWS_ACCESS_KEY_ID="$(jq -r '.Credentials.AccessKeyId' $ROLE_FILE)"
+    ROLE_AWS_SECRET_ACCESS_KEY="$(jq -r '.Credentials.SecretAccessKey' $ROLE_FILE)"
+    ROLE_AWS_SESSION_TOKEN="$(jq -r '.Credentials.SessionToken' $ROLE_FILE)"
+    ROLE_EXPIRATION="$(jq -r '.Credentials.Expiration' $ROLE_FILE)"
+    ROLE_ARN="$(jq -r '.AssumedRoleUser.Arn' $ROLE_FILE)"
+    ROLE_ASSUMED_ROLE_ID="$(jq -r '.AssumedRoleUser.AssumedRoleId' $ROLE_FILE)"
+    unset AWS_PROFILE
+    export AWS_ACCESS_KEY_ID=$ROLE_AWS_ACCESS_KEY_ID
+    export AWS_SECRET_ACCESS_KEY=$ROLE_AWS_SECRET_ACCESS_KEY
+    export AWS_SESSION_TOKEN=$ROLE_AWS_SESSION_TOKEN
+    export AWS_ROLE_EXPIRATION=$ROLE_EXPIRATION
+    export AWS_ROLE_ARN=$ROLE_ARN
+    export AWS_ROLE_ASSUMED_ROLE_ID=$ROLE_ASSUMED_ROLE_ID
+    echo "Session name is $(echo $AWS_ROLE_ASSUMED_ROLE_ID | sed 's/^.*://')"
+  else
+    if [ -z "$ROLE_ARN" ]; then
+      read -p "Role: " ROLE_ARN
+    fi
+    ROLE_SESSION_NAME="$(echo $ROLE_ARN | sed 's/^.*:role\///')Session$(date '+%s')"
+    aws sts assume-role \
+      --role-arn $ROLE_ARN \
+      --role-session-name $ROLE_SESSION_NAME > $ROLE_FILE
+
+    # Remove the file if we failed
+    if [ $? -ne 0 ]; then
+      echo "Error assuming the role"
+      rm $ROLE_FILE
+      return
+    else
+      ROLE_AWS_ACCESS_KEY_ID="$(jq -r '.Credentials.AccessKeyId' $ROLE_FILE)"
+      ROLE_AWS_SECRET_ACCESS_KEY="$(jq -r '.Credentials.SecretAccessKey' $ROLE_FILE)"
+      ROLE_AWS_SESSION_TOKEN="$(jq -r '.Credentials.SessionToken' $ROLE_FILE)"
+      ROLE_EXPIRATION="$(jq -r '.Credentials.Expiration' $ROLE_FILE)"
+      ROLE_ARN="$(jq -r '.AssumedRoleUser.Arn' $ROLE_FILE)"
+      ROLE_ASSUMED_ROLE_ID="$(jq -r '.AssumedRoleUser.AssumedRoleId' $ROLE_FILE)"
+      unset AWS_PROFILE
+      export AWS_ACCESS_KEY_ID=$ROLE_AWS_ACCESS_KEY_ID
+      export AWS_SECRET_ACCESS_KEY=$ROLE_AWS_SECRET_ACCESS_KEY
+      export AWS_SESSION_TOKEN=$ROLE_AWS_SESSION_TOKEN
+      export AWS_ROLE_EXPIRATION=$ROLE_EXPIRATION
+      export AWS_ROLE_ARN=$ROLE_ARN
+      export AWS_ROLE_ASSUMED_ROLE_ID=$ROLE_ASSUMED_ROLE_ID
+      echo "Assumed the role $ROLE_ARN"
+      echo "Session name is $(echo $AWS_ROLE_ASSUMED_ROLE_ID | sed 's/^.*://')"
+    fi
+  fi
+}

@@ -1,7 +1,7 @@
 " Setup Python for Neovim
 " ---------------------------------------------------------
-let g:python_host_prog = '/Users/jasonmyers/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/jasonmyers/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Setup Dein (Plugin Manager)
 " ----------------------------------------------------------
@@ -165,7 +165,7 @@ call dein#add('mhinz/vim-sayonara')
 " Iabbrev auto-correction library
 call dein#add('chip/vim-fat-finger')
 " Matchit enhances jump motions
-call dein#add('edsono/vim-matchit')
+call dein#add('adelarsq/vim-matchit')
 " More . repeat functionality
 call dein#add('tpope/vim-repeat')
 " Delete all but current buffer
