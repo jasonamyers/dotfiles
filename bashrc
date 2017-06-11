@@ -23,9 +23,6 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}
 export COMMAND_MODE=unix2003
 export TM_PYCHECKER=pylint
 
-# If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-
 export EDITOR="vim"
 
 #borrowed from MITSUHIKO
