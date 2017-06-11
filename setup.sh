@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Install Homebrew
 echo -e "\n>> Installing Homebrew"
