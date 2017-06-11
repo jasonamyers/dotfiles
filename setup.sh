@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 
 # Install Homebrew
 echo -e "\n>> Installing Homebrew"
@@ -69,3 +68,9 @@ ln -s `pyenv which flake8` ~/bin/flake8
 # Running osx-for-hackers
 echo -e "\n>> Running osx-for-hackers"
 ~/dotfiles/osx-for-hackers.sh
+
+# Installing Portray
+echo -e "\n>> Installing Portray"
+curl -o /usr/local/bin/portray https://github.com/jasonamyers/portray/releases/download/v0.2/portray
+chmod a+x /usr/local/bin/portray
+
