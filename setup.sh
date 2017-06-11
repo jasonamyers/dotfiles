@@ -71,6 +71,6 @@ echo -e "\n>> Running osx-for-hackers"
 
 # Installing Portray
 echo -e "\n>> Installing Portray"
-curl -o /usr/local/bin/portray https://github.com/jasonamyers/portray/releases/download/v0.2/portray
+curl -o /usr/local/bin/portray -L https://github.com/jasonamyers/portray/releases/download/v0.2/portray
 chmod a+x /usr/local/bin/portray
 
