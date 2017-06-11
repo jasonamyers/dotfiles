@@ -28,6 +28,7 @@ rm -rf ~/.bash*
 
 # Init symlinks for config files
 echo -e "\n>> Creating symlinks"
+pushd dotfiles
 for file in [a-zA-Z]* ; do
     if [[ "$file" != "setup.sh" && "$file" != "README.md" && "$file" != "env" && "$file" != "LICENSE.txt" ]] ; then
         if [[ -h ~/."$file" ]] ; then
@@ -43,10 +44,11 @@ for file in [a-zA-Z]* ; do
         ln -s `pwd`/"$file" ~/."$file" && echo "  Linked ~/.$file to `pwd`/$file" || echo "  Couldn't link ~/.$file to `pwd`/$file!"
     fi
 done
+popd
 
 # Sourcing bashrc
 echo -e "\n>> Sourcing bashrc"
-source .bashrc
+source ~/.bashrc
 
 # Installing Python 2 and 3
 echo -e "\n>> Installing Python 2 and 3"
@@ -65,4 +67,4 @@ ln -s `pyenv which flake8` ~/bin/flake8
 
 # Running osx-for-hackers
 echo -e "\n>> Running osx-for-hackers"
-./osx-for-hackers.sh
+~/dotfiles/osx-for-hackers.sh
