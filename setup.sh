@@ -21,6 +21,7 @@ git clone https://github.com/yyuu/pyenv-virtualenvwrapper.git ~/.pyenv/plugins/p
 # Cloning dotfiles repo
 echo -e "\n>> Cloning dotfiles"
 git clone https://github.com/jasonamyers/dotfiles.git
+git clone https://github.com/nojhan/liquidprompt.git
 
 # Cloning dotfiles repo
 echo -e "\n>> Cleaning up default bash files"
