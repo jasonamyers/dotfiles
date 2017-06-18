@@ -1,9 +1,8 @@
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export TERM=xterm-color
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
-alias ls='ls -G'
+alias ls='ls -G --color'
 alias ll='ls -hlatr --color'
 alias gg='history | grep'
 #alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
@@ -17,13 +16,13 @@ alias pmsh='python manage.py shell'
 alias pmdb='python manage.py dbshell'
 
 
-export GIT_EDITOR="vim"
+export GIT_EDITOR="nvim"
 GIT_PS1_SHOWDIRTYSTATE=true
 export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}: ${PWD/#$HOME/~}\007"'
 export COMMAND_MODE=unix2003
 export TM_PYCHECKER=pylint
 
-export EDITOR="vim"
+export EDITOR="nvim"
 
 #borrowed from MITSUHIKO
 MY_DEFAULT_COLOR="[00m"
@@ -64,12 +63,59 @@ export PATH="/usr/local/heroku/bin:$PATH"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 alias tmux="TERM=screen-256color-bce tmux"
 
-export NVM_DIR="/Users/jmyers/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # added by travis gem
 [ -f /Users/jasonmyers/.travis/travis.sh ] && source /Users/jasonmyers/.travis/travis.sh
 
-source /Users/jasonamyers/functions.sh
-source /Users/jasonamyers/liquidprompt/liquidprompt
+source $HOME/liquidprompt/liquidprompt
 prompt_tag $PORTRAY_PROMPT
+
+[[ -s "/home/jasonamyers/.gvm/scripts/gvm" ]] && source "/home/jasonamyers/.gvm/scripts/gvm"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# List of accounts to read the last tweet from, comma separated
+# The first in the list is read by the party parrot.
+export TTC_BOTS='tinycarebot,selfcare_bot,magicrealismbot'
+
+# Use this to have a different animal say a message in the big box.
+export TTC_SAY_BOX='minions'
+
+# List of folders to look into for `git` commits, comma separated.
+export TTC_REPOS='~/dev'
+
+# The max directory-depth to look for git repositories in
+# the directories defined with `TTC_REPOS`. Note that the deeper
+# the directory depth, the slower the results will be fetched.
+export TTC_REPOS_DEPTH=2
+
+# Which method is to be used to read the git commits ('gitstandup' | 'gitlog').
+# If you're having problems seeing your commits in the dahsboard, set
+# this value to gitlog.
+export TTC_GITBOT='gitlog'
+
+# Location/zip code to check the weather for. Both 90210 and "San Francisco, CA"
+# _should_ be ok (the zip code doesn't always work -- use a location
+# first, if you can). It's using weather.service.msn.com behind the curtains.
+export TTC_WEATHER='37128'
+
+# Set to false if you're an imperial savage. <3
+export TTC_CELSIUS=False
+
+# Unset this if you _don't_ want to use Twitter keys and want to
+# use web scraping instead.
+export TTC_APIKEYS=true
+
+# Refresh the dashboard every 20 minutes.
+export TTC_UPDATE_INTERVAL=20
+
+# Turn off terminal title
+export TTC_TERMINAL_TITLE=false
+
+# Twitter api keys
+export TTC_CONSUMER_KEY='lxJl2n7KdB5pIET1ejfsgiAG7'
+export TTC_CONSUMER_SECRET='NRu91gJ5OJTU8JqqgsrTy01jqpydVMgxxZCmD5gloDzBfIuwxa'
+export TTC_ACCESS_TOKEN='13553-Fv9nBr1VKPkjOreBfbSzxqcjde5GlBZF2NOtkVFFZCUj'
+export TTC_ACCESS_TOKEN_SECRET='LBd0KPn8r9RZdI8E6cbeEnyiQAgEOtaB9jacOb8WnJ8eW'
