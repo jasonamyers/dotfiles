@@ -69,7 +69,8 @@ call dein#add('lilydjwg/colorizer')
 
 " Other language Plugins
 " ------------------------------------------------------------
-
+" Golang indentation
+call dein#add('fatih/vim-go')
 " Yaml indentation
 call dein#add('martin-svk/vim-yaml')
 " Markdown syntax
