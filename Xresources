@@ -62,24 +62,21 @@ Xft.dpi: 221
 Xft.antialias:          1
 Xft.autohint:           0
 Xft.hinting:            1
+Xft.rgba:		rgb
 
-! ROFI Color theme
+! ROFI
 rofi.color-enabled: true
 rofi.color-window: #002b37, #002b37, #003642
 rofi.color-normal: #002b37, #819396, #002b37, #003642, #819396
 rofi.color-active: #002b37, #008ed4, #002b37, #003642, #008ed4
 rofi.color-urgent: #002b37, #da4281, #002b37, #003642, #da4281
-
-rofi.terminal:          urxvt
-rofi.run-shell-command: urxvt -e '{cmd}'
-rofi.ssh-command:       tmux split-window -h -p 50 '{ssh-client} {host}'
 rofi.location:      0
 rofi.width:         100
 rofi.padding:       420
 rofi.borderwidth:   2
 rofi.lines:         5
 rofi.opacity:       80
-rofi.font:          Hack 12
+rofi.font:          Hack 16
 rofi.eh:            2
 
 ! urxvt

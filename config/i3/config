@@ -9,6 +9,23 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# window colors
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources for some reason.
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
+
 set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -190,9 +207,9 @@ bar {
 
 # Audio Control
 # https://faq.i3wm.org/question/125/how-to-change-the-systems-volume/?answer=249#post-id-249
-bindsym XF86AudioRaiseVolume exec amixer -c1 -q set Master 5%+ -q
-bindsym XF86AudioLowerVolume exec amixer -c1  -q set Master 5%- -q
-bindsym XF86AudioMute exec amixer -c1 -q set Master toggle
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ -q
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- -q
+bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # Flash between workspaces
 bindsym $mod+z workspace back_and_forth
@@ -218,33 +235,10 @@ exec --no-startup-id cat /dev/null | ssh-add &
 # Deal with HiDPI internal display
 exec xrandr --output eDP1 --dpi 221
 # rofi launcher
-bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -font "Hack 22"
+bindsym $mod+d exec rofi -show run -font "Hack 22"
 # wal
 exec_always wal -i /home/jasonamyers/Pictures/wallpaper.jpg -t
 
-# colors
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
-
-# window colors
-# Set colors from Xresources
-# Change 'color7' and 'color2' to whatever colors you want i3 to use
-# from the generated scheme.
-# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
-# it fails to get colors from Xresources for some reason.
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
-# class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
-client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $bg     $fg  $bg       $bg
-client.urgent           $bg     $bg     $fg  $bg       $bg
-client.placeholder      $bg     $bg     $fg  $bg       $bg
-
-client.background       $bg
 
 # redshift (uses config)
 exec --no-startup-id redshift --config ~/.config/redshift.conf
