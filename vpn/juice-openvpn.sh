@@ -121,7 +121,7 @@ echo " | | |_| | |_| | | (_|  __/   |"
 echo " |  \___/ \__,_|_|\___\___|   |"
 echo " | Juice VPN Script v$scriptversion     |"
 echo -e " ==============================\n"
-echo "-> https://hidemyass.com/vpn"
+echo "-> https://vpn.juiceboxdata.com"
 }
 
 showtitle
@@ -163,7 +163,6 @@ checkpkg openvpn
 checkpkg dialog
 checkpkg fping
 
-sleep 4
 clear
 
 showtitle
