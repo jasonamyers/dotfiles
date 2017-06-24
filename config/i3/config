@@ -134,8 +134,10 @@ bindsym $mod+Shift+e exit
 # lock screen
 bindsym Mod4+l exec i3lock
 
-mode  "(s)leep (h)ybernate (p)owersave (r)estart shut(d)own" {
+set $sysmenu "system: (s)leep (h)ybernate (p)owersave (r)estart shut(d)own"
+bindsym $mod+Escape     mode $sysmenu
 
+mode $sysmenu {
         bindsym s exec sudo pm-suspend; mode "default"
         bindsym h exec sudo pm-hibernate; mode "default"
         bindsym p exec sudo pm-powersave; mode "default"
@@ -145,7 +147,6 @@ mode  "(s)leep (h)ybernate (p)owersave (r)estart shut(d)own" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Shift+x mode "(s)leep (h)ybernate (p)owersave (r)estart shut(d)own"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -203,7 +204,11 @@ bindsym $mod+x move container to output right
 # http://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup
 # added by inavl
 for_window [class="^.*"] border pixel 0
+#gaps inner 5
+#gaps outer 5
 exec_always --no-startup-id feh --bg-scale /home/jasonamyers/Pictures/wallpaper.jpg
+smart_gaps on
+smart_borders on
 exec xmodmap ~/.Xmodmap
 exec xcompmgr
 exec --no-startup-id nm-applet
@@ -215,7 +220,7 @@ exec xrandr --output eDP1 --dpi 221
 # rofi launcher
 bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -font "Hack 22"
 # wal
-exec_always wal -i /home/inavl/Pictures/wallpaper.jpg -t
+exec_always wal -i /home/jasonamyers/Pictures/wallpaper.jpg -t
 
 # colors
 set $bg-color 	         #2f343f
