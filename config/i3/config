@@ -34,7 +34,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -177,16 +177,12 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     colors {
-        # Whole color settings
-        background #000000
-        statusline #ffffff
-        separator  #666666
-
-        # Type             border  background font
-        focused_workspace  #008fff #007fff #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #aa0000 #990000 #ffffff
+        background #2f343f
+        separator #757575
+        #                  border             background         text
+        focused_workspace  #2f343f            #2f343f            #f3f4f5
+        inactive_workspace #2f343f            #2f343f            #676E7D
+        urgent_workspace   #E53935            #E53935            #f3f4f5
     }
     status_command i3status
 }
@@ -205,10 +201,45 @@ bindsym $mod+x move container to output right
 
 # autostart apps
 # http://i3wm.org/docs/userguide.html#_automatically_starting_applications_on_i3_startup
+# added by inavl
+for_window [class="^.*"] border pixel 0
+exec_always --no-startup-id feh --bg-scale /home/jasonamyers/Pictures/wallpaper.jpg
 exec xmodmap ~/.Xmodmap
 exec xcompmgr
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 exec --no-startup-id syndaemon -d -i 1
 exec --no-startup-id cat /dev/null | ssh-add &
+# Deal with HiDPI internal display
 exec xrandr --output eDP1 --dpi 221
+# rofi launcher
+bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -font "Hack 22"
+# wal
+exec_always wal -i /home/inavl/Pictures/wallpaper.jpg -t
+
+# colors
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# window colors
+# Set colors from Xresources
+# Change 'color7' and 'color2' to whatever colors you want i3 to use
+# from the generated scheme.
+# NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+# it fails to get colors from Xresources for some reason.
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
+
+# redshift (uses config)
+exec --no-startup-id redshift --config ~/.config/redshift.conf
