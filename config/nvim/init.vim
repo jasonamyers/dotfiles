@@ -682,7 +682,6 @@ let g:markdown_fenced_languages=[
       \'git=gitconfig',
       \'javascript',
       \'python',
-      \'tmux',
       \'viml=vim',
       \'xdefaults',
       \'zsh']

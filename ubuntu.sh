@@ -4,42 +4,9 @@
 echo -e "\n>> Installing PreReqs"
 sudo apt-get install -y git vim make gnome-tweak-tool curl build-essential libssl-dev \
     zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget llvm libncurses5-dev \
-    mercurial binutils bison gcc terminator thunar ranger htop cmatrix neofetch redshift \
-    rofi compton scrot feh maim dunst lxappearance git slop cmake libxcb1-dev \
-    libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
-    libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
-    libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf \
-    libxcb-xrm0 libxcb-xrm-dev pkg-config libxcb1 libpam-dev libcairo-dev \
-    libxcb-composite0 libxcb-composite0-dev libxcb-xinerama0-dev libev-dev libx11-dev \
-    libx11-xcb-dev libxkbcommon0 libxkbcommon-x11-0 libxcb-dpms0-dev libxcb-image0-dev \
-    libxcb-util0-dev libxcb-xkb-dev libxkbcommon-x11-dev libxkbcommon-dev imagemagick bash \
-    awk utils-linux libdbus-1-dev libx11-dev libxrandr-dev libxss-dev libglib2.0-dev \
-    libpango1.0-dev libgtk2.0-dev libxdg-basedir-dev feh i3
+    htop git shellcheck
 
 sudo apt autoremove -y
-
-echo -E "\n>> I3-gaps"
-git clone https://www.github.com/Airblader/i3 /tmp/i3-gaps
-cd /tmp/i3-gaps
-autoreconf --force --install
-rm -rf build/
-mkdir -p build && cd build/
-# Disabling sanitizers is important for release versions!
-# The prefix and sysconfdir are, obviously, dependent on the distribution.
-../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-make
-sudo make install
-
-echo -E "\n>> I3 fancy lock"
-git clone https://github.com/meskarune/i3lock-fancy /tmp/i3lock-fancy
-sudo cp -R /tmp/i3lock-fancy/lock /tmp/i3lock-fancy/icons /usr/local/bin
-
-echo -E "\n>> I3 dunst"
-git clone https://github.com/dunst-project/dunst.git /tmp/dunst
-cd /tmp/dunst
-make
-sudo make PREFIX=/usr install
-
 
 # Install pyenv
 echo -e "\n>> Installing pyenv"
@@ -84,14 +51,15 @@ source ~/.bashrc
 
 # Installing Python 2 and 3
 echo -e "\n>> Installing Python 2 and 3"
-pyenv install 2.7.13
-pyenv install 3.6.1
+pyenv install 2.7.14
+pyenv install 3.6.3
+pyenv global 3.6.3
 
 # Building neovim virtualenvs
 pyenv virtualenv 2.7.13 neovim2
-pyenv virtualenv 3.6.1 neovim3
 pyenv activate neovim2
 pip install neovim
+pyenv virtualenv 3.6.3 neovim3
 pyenv activate neovim3
 pip install neovim
 pip install flake8
