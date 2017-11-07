@@ -4,7 +4,7 @@
 echo -e "\n>> Installing PreReqs"
 sudo apt-get install -y git vim make gnome-tweak-tool curl build-essential libssl-dev \
     zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget llvm libncurses5-dev \
-    htop git shellcheck
+    htop git shellcheck bison gcc mercurial
 
 sudo apt autoremove -y
 
@@ -66,13 +66,13 @@ pip install flake8
 ln -s `pyenv which flake8` ~/bin/flake8
 
 # Installing GVM
-echo -e "\n>> Installing GVM (Golang) and GOLANG 1.8"
+echo -e "\n>> Installing GVM (Golang) and GOLANG 1.9"
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 source /home/jasonamyers/.gvm/scripts/gvm
 gvm install go1.4 -B
 gvm use go1.4
 export GOROOT_BOOTSTRAP=$GOROOT
-gvm install go1.8
+gvm install go1.9
 
 
 # Installing Portray
