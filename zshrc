@@ -9,9 +9,9 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="simple"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
-export DEFAULT_USER="jasonmyers"
+export DEFAULT_USER="jasonamyers"
 export ZSH_POWERLINE_SHOW_USER="false"
 export ZSH_POWERLINE_SHOW_IP="false"
 export ZSH_POWERLINE_SINGLE_LINE="true"
@@ -67,13 +67,13 @@ export SAVEHIST=$HISTSIZE
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="&:[ ]*:ls:ll:la:l:cd:pwd:exit:mc:su:df:clear"
-export PATH=$PATH:$HOME/.local/bin:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/lib/go-1.9/bin
 export PATH=$PATH:/Library/TeX/texbin
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-# pyenv virtualenvwrapper
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+pyenv virtualenvwrapper
 # export PATH="$HOME/.rbenv/bin:$PATH"
 # export PIP_VIRTUALENV_BASE=$WORKON_HOME
 # export PIP_RESPECT_VIRTUALENV=true
@@ -109,7 +109,7 @@ source ~/.zsh/func/somafm
 source ~/.zsh/func/gerritsetup
 source ~/.zsh/func/get_mfa_session
 source ~/.zsh/func/dinspect
-plugins=()
+plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 #source ~/.nvm/nvm.sh
@@ -128,3 +128,13 @@ alias dinspect=docker_inspect_name
 # Handle keybinding issues
 bindkey -e
 bindkey '^R' history-incremental-search-backward
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_portray virtualenv context dir vcs)
+POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_CUSTOM_PORTRAY="echo $PORTRAY_PROMPT"
+POWERLEVEL9K_CUSTOM_PORTRAY_FOREGROUND="white"
+POWERLEVEL9K_CUSTOM_PORTRAY_BACKGROUND="red"
+POWERLEVEL9K_CUSTOM_PORTRAY_ICON=FREEBSD_ICON

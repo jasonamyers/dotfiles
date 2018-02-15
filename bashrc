@@ -119,3 +119,6 @@ export TTC_CONSUMER_KEY='lxJl2n7KdB5pIET1ejfsgiAG7'
 export TTC_CONSUMER_SECRET='NRu91gJ5OJTU8JqqgsrTy01jqpydVMgxxZCmD5gloDzBfIuwxa'
 export TTC_ACCESS_TOKEN='13553-Fv9nBr1VKPkjOreBfbSzxqcjde5GlBZF2NOtkVFFZCUj'
 export TTC_ACCESS_TOKEN_SECRET='LBd0KPn8r9RZdI8E6cbeEnyiQAgEOtaB9jacOb8WnJ8eW'
+
+# added by travis gem
+[ -f /home/jasonamyers/.travis/travis.sh ] && source /home/jasonamyers/.travis/travis.sh

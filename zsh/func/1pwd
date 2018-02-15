@@ -1,0 +1,1 @@
+function 1pwd() { eval $(op signin my); op get item $* | jq '.details.fields[] | select(.designation=="password").value'; }
