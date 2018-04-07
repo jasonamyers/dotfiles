@@ -1,10 +1,11 @@
 [color]
-	ui = auto
+	ui = true
 [core]
 	autocrlf = input
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
 	name = Jason Myers
-	email = jason@jasonamyers.com
+	email = jason.myers@getbuilt.com
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
     pu = !"git fetch origin -v; git fetch upstream -v; git merge upstream/master"
@@ -64,3 +65,17 @@
 [merge]
     tool = vimdiff
 
+[credential]
+	helper = osxkeychain
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse

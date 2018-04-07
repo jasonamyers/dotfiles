@@ -2,8 +2,8 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export TERM=xterm-color
 
-alias ls='ls -G --color'
-alias ll='ls -hlatr --color'
+alias ls='ls -G'
+alias ll='ls -hlatr'
 alias gg='history | grep'
 #alias vim='~/Applications/MacVim.app/Contents/MacOS/Vim'
 alias breakitdown="history | awk '{a[$2]++ } END{for(i in a){print a[i] ' ' i}}'|sort -rn |head -n 20"

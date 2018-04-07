@@ -11,7 +11,7 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
-export DEFAULT_USER="jasonamyers"
+export DEFAULT_USER="jasonmyers"
 export ZSH_POWERLINE_SHOW_USER="false"
 export ZSH_POWERLINE_SHOW_IP="false"
 export ZSH_POWERLINE_SINGLE_LINE="true"
@@ -138,3 +138,5 @@ POWERLEVEL9K_CUSTOM_PORTRAY="echo $PORTRAY_PROMPT"
 POWERLEVEL9K_CUSTOM_PORTRAY_FOREGROUND="white"
 POWERLEVEL9K_CUSTOM_PORTRAY_BACKGROUND="red"
 POWERLEVEL9K_CUSTOM_PORTRAY_ICON=FREEBSD_ICON
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"

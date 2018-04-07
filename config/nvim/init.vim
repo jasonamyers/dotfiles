@@ -1,7 +1,7 @@
 " Setup Python for Neovim
 " ---------------------------------------------------------
-let g:python_host_prog = '/home/jasonamyers/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/home/jasonamyers/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = '/Users/jasonmyers/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/jasonmyers/.pyenv/versions/neovim3/bin/python'
 
 " Setup Dein (Plugin Manager)
 " ----------------------------------------------------------
@@ -17,7 +17,7 @@ let g:python3_host_prog = '/home/jasonamyers/.pyenv/versions/neovim3/bin/python'
 " ------------------------------------------------------------
 
 " Asynchronous maker and linter (needs linters to work)
-call dein#add('benekastah/neomake')
+" call dein#add('benekastah/neomake')
 " Autocomplete
 call dein#add('Shougo/deoplete.nvim')
 " Automatically closing pair stuff
@@ -31,6 +31,15 @@ call dein#add('tpope/vim-sleuth')
 
 " Python Plugins
 " ------------------------------------------------------------
+
+" Python Mode
+call dein#add('klen/python-mode')
+
+" Extra Syntax
+call dein#add('mitsuhiko/vim-python-combined')
+
+" PEP8 Indent
+call dein#add('hynek/vim-python-pep8-indent')
 
 " Jedi library
 call dein#add('davidhalter/jedi-vim')
@@ -81,6 +90,8 @@ call dein#add('tpope/vim-git')
 call dein#add('honza/dockerfile.vim')
 " Terraform
 call dein#add('hashivim/vim-terraform')
+" Linting
+call dein#add('w0rp/ale')
 
 " Unite fuzzy searcher
 " ------------------------------------------------------------
@@ -103,10 +114,17 @@ call dein#add('dyng/ctrlsf.vim')
 
 " Nerdtree file browser
 call dein#add('scrooloose/nerdtree')
-" Lightline (simple status line)
-call dein#add('itchyny/lightline.vim')
+" Airline (status bar)
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
 " Buffers tabline
-call dein#add('ap/vim-buftabline')
+" call dein#add('ap/vim-buftabline')
+" Tag bar
+call dein#add('majutsushi/tagbar')
+" Comfortable Motion
+call dein#add('yuttie/comfortable-motion.vim')
+" Dev Icons
+call dein#add('ryanoasis/vim-devicons')
 
 " External tools integration plugins
 " -----------------------------------------------------------
@@ -151,6 +169,8 @@ call dein#add('morhetz/gruvbox')
 call dein#add('kabbamine/yowish.vim')
 " Janah
 call dein#add('mhinz/vim-janah')
+" Base16
+call dein#add('chriskempson/base16-vim')
 
 " Other
 " ---------------------------------------------------------
@@ -611,6 +631,10 @@ let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeShowHidden=1
 let g:NERDTreeHighlightCursorline=0
 let g:NERDTreeRespectWildIgnore=1
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
+let NERDTreeWinSize=40
+autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
+nmap " :NERDTreeToggle<CR>
 
 " Gitgutter settings
 " -----------------------------------------------------
@@ -629,49 +653,30 @@ let g:jsx_ext_required=0
 " SimpylFold settings
 " -----------------------------------------------------
 let g:SimpylFold_docstring_preview = 1
-autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+" autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 
-" Lightline settings
+" Airline settings
 " -----------------------------------------------------
-let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'tab': {
-      \   'active': [ 'filename' ],
-      \   'inactive': [ 'filename' ]
-      \ },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype', 'fileencoding', 'fileformat' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"HELP":&readonly?"RO":""}'
-      \ },
-      \ 'component_function': {
-      \   'mode': 'utils#lightLineMode',
-      \   'filename': 'utils#lightLineFilename',
-      \   'filetype': 'utils#lightLineFiletype',
-      \   'fileformat': 'utils#lightLineFileformat',
-      \   'fileencoding': 'utils#lightLineFileencoding'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&readonly)'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+let g:airline_theme='base16_spacemacs'             " set airline theme
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+
 
 " Neomake settings
 " -----------------------------------------------------
-let g:neomake_verbose=0
-let g:neomake_warning_sign = {
-      \ 'text': '❯',
-      \ 'texthl': 'WarningMsg',
-      \ }
-let g:neomake_error_sign = {
-      \ 'text': '❯',
-      \ 'texthl': 'ErrorMsg',
-      \ }
+" let g:neomake_verbose=0
+" let g:neomake_warning_sign = {
+"       \ 'text': '❯',
+"       \ 'texthl': 'WarningMsg',
+"       \ }
+" let g:neomake_error_sign = {
+"       \ 'text': '❯',
+"       \ 'texthl': 'ErrorMsg',
+"       \ }
 
 " Vim Markdown settings
 " -----------------------------------------------------
@@ -699,7 +704,7 @@ let g:qs_highlight_on_keys=['f', 'F', 't', 'T']
 " -----------------------------------------------------
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_refresh_always=1
-let g:deoplete#auto_complete_start_length=5
+let g:deoplete#auto_complete_start_length=3
 let g:deoplete#file#enable_buffer_path=1
 
 let g:deoplete#sources={}
@@ -727,6 +732,131 @@ let g:used_javascript_libs = 'chai,flux,react,underscore'
 " Colorizer settings
 " -----------------------------------------------------
 let g:colorizer_nomap=1
+
+" DevIcon Settings
+" -----------------------------------------------------
+" loading the plugin
+let g:webdevicons_enable = 1
+" adding the flags to NERDTree
+let g:webdevicons_enable_nerdtree = 1
+" adding to vim-airline's tabline
+let g:webdevicons_enable_airline_tabline = 1
+" adding to vim-airline's statusline
+let g:webdevicons_enable_airline_statusline = 1
+" turn on/off file node glyph decorations (not particularly useful)
+let g:WebDevIconsUnicodeDecorateFileNodes = 1
+" use double-width(1) or single-width(0) glyphs
+" only manipulates padding, has no effect on terminal or set(guifont) font
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+" whether or not to show the nerdtree brackets around flags
+let g:webdevicons_conceal_nerdtree_brackets = 0
+" the amount of space to use after the glyph character (default ' ')
+let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+" Force extra padding in NERDTree so that the filetype icons line up vertically
+let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+" change the default character when no match found
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = 'ƛ'
+" set a byte character marker (BOM) utf-8 symbol when retrieving file encoding
+" disabled by default with no value
+let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
+" enable folder/directory glyph flag (disabled by default with 0)
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" enable open and close folder/directory glyph flags (disabled by default with 0)
+let g:DevIconsEnableFoldersOpenClose = 1
+" enable pattern matching glyphs on folder/directory (enabled by default with 1)
+let g:DevIconsEnableFolderPatternMatching = 1
+" enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
+let g:DevIconsEnableFolderExtensionPatternMatching = 0
+
+" Comfortable Motion Settings
+"------------------------------------------------------
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_impulse_multiplier = 2  " Feel free to increase/decrease this value.
+nnoremap <silent> <C-d> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 1)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -1)<CR>
+nnoremap <silent> <C-f> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <C-b> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+
+" TagBar settings
+"------------------------------------------------------
+let g:tagbar_autofocus=0
+let g:tagbar_width=42
+autocmd BufEnter *.py :call tagbar#autoopen(0)
+autocmd BufWinLeave *.py :TagbarClose
+
+" Python settings
+"------------------------------------------------------
+" python executables for different plugins
+let g:pymode_python='python3'
+
+" rope
+let g:pymode_rope=0
+let g:pymode_rope_completion=0
+let g:pymode_rope_complete_on_dot=0
+let g:pymode_rope_auto_project=0
+let g:pymode_rope_enable_autoimport=0
+let g:pymode_rope_autoimport_generate=0
+let g:pymode_rope_guess_project=0
+
+" documentation
+let g:pymode_doc=0
+let g:pymode_doc_bind='K'
+
+" lints
+let g:pymode_lint=0
+
+" virtualenv
+let g:pymode_virtualenv=1
+
+" breakpoints
+let g:pymode_breakpoint=1
+let g:pymode_breakpoint_key='<leader>b'
+
+" syntax highlight
+let g:pymode_syntax=1
+let g:pymode_syntax_slow_sync=1
+let g:pymode_syntax_all=1
+let g:pymode_syntax_print_as_function=g:pymode_syntax_all
+let g:pymode_syntax_highlight_async_await=g:pymode_syntax_all
+let g:pymode_syntax_highlight_equal_operator=g:pymode_syntax_all
+let g:pymode_syntax_highlight_stars_operator=g:pymode_syntax_all
+let g:pymode_syntax_highlight_self=g:pymode_syntax_all
+let g:pymode_syntax_indent_errors=g:pymode_syntax_all
+let g:pymode_syntax_string_formatting=g:pymode_syntax_all
+let g:pymode_syntax_space_errors=g:pymode_syntax_all
+let g:pymode_syntax_string_format=g:pymode_syntax_all
+let g:pymode_syntax_string_templates=g:pymode_syntax_all
+let g:pymode_syntax_doctests=g:pymode_syntax_all
+let g:pymode_syntax_builtin_objs=g:pymode_syntax_all
+let g:pymode_syntax_builtin_types=g:pymode_syntax_all
+let g:pymode_syntax_highlight_exceptions=g:pymode_syntax_all
+let g:pymode_syntax_docstrings=g:pymode_syntax_all
+
+" highlight 'long' lines (>= 80 symbols) in python files
+augroup vimrc_autocmds
+    autocmd!
+    autocmd FileType python,rst,c,cpp highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python,rst,c,cpp match Excess /\%81v.*/
+    autocmd FileType python,rst,c,cpp set nowrap
+    autocmd FileType python,rst,c,cpp set colorcolumn=80
+augroup END
+
+" code folding
+let g:pymode_folding=0
+
+" pep8 indents
+let g:pymode_indent=1
+
+" code running
+let g:pymode_run=1
+let g:pymode_run_bind='<F5>'
+
+let g:ale_sign_column_always = 0
+let g:ale_emit_conflict_warnings = 0
+let g:pymode_rope_lookup_project = 0
+
 
 " Plugin Mappings
 " -----------------------------------------------------
@@ -868,12 +998,18 @@ syntax on
 set background=dark
 
 " Color scheme based on time
-if strftime("%H") < 15
-  colorscheme janah
-else
-  let g:rehash256=1
-  colorscheme janah
+let base16colorspace=256
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
 endif
+" if strftime("%H") < 15
+"   colorscheme base16-default-dark
+" else
+"   let g:rehash256=1
+"   colorscheme base16-default-dark
+" endif
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -889,10 +1025,10 @@ highlight SpecialKey ctermfg=235 guifg=gray
 hi! Folded term=NONE cterm=NONE gui=NONE ctermbg=NONE
 
 " Link highlight groups to improve buftabline colors
-hi! link BufTabLineCurrent Identifier
-hi! link BufTabLineActive Comment
-hi! link BufTabLineHidden Comment
-hi! link BufTabLineFill Comment
+" hi! link BufTabLineCurrent Identifier
+" hi! link BufTabLineActive Comment
+" hi! link BufTabLineHidden Comment
+" hi! link BufTabLineFill Comment
 
 " Autocommands
 " -----------------------------------------------------
@@ -919,7 +1055,7 @@ augroup line_return
 augroup END
 
 " Set Autocompleter for python
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 
 
@@ -927,22 +1063,22 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " -----------------------------------------------------
 
 " npm install -g eslint
-autocmd BufWritePost *.js Neomake eslint
+" autocmd BufWritePost *.js Neomake eslint
 " npm install -g jsonlint
-autocmd BufWritePost *.json Neomake jsonlint
+" autocmd BufWritePost *.json Neomake jsonlint
 " npm install -g typescript
-autocmd BufWritePost *.ts Neomake tsc
+" autocmd BufWritePost *.ts Neomake tsc
 " gem install rubocop
-autocmd BufWritePost *.rb Neomake rubocop
+" autocmd BufWritePost *.rb Neomake rubocop
 " sudo apt-get install elixir
-autocmd BufWritePost *.ex Neomake elixir
+" autocmd BufWritePost *.ex Neomake elixir
 " apt-get install tidy
-autocmd BufWritePost *.html Neomake tidy
+" autocmd BufWritePost *.html Neomake tidy
 " gem install haml_lint
-autocmd BufWritePost *.haml Neomake hamllint
+" autocmd BufWritePost *.haml Neomake hamllint
 " gem install scsslint
-autocmd BufWritePost *.scss Neomake scsslint
+" autocmd BufWritePost *.scss Neomake scsslint
 " gem install mdl
-autocmd BufWritePost *.md Neomake mdl
+" autocmd BufWritePost *.md Neomake mdl
 " apt-get install shellcheck
-autocmd BufWritePost *.sh Neomake shellcheck
+" autocmd BufWritePost *.sh Neomake shellcheck
