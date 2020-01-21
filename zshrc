@@ -9,7 +9,7 @@ HELPDIR=/usr/local/share/zsh/helpfiles
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="af-magic"
 
 export DEFAULT_USER="jasonmyers"
 export ZSH_POWERLINE_SHOW_USER="false"

@@ -6,13 +6,13 @@ echo -e "\n>> Installing Homebrew"
 
 # Install Mac apps
 echo -e "\n>> Installing Mac apps via brew cask"
-brew cask install bartender spotify 1password google-chrome iterm2 omnigraffle istat-menus pycharm atom paw docker spectacle
+brew cask install 1password google-chrome iterm2 docker spectacle visual-studio-code
 
 # Install brew utils
 echo -e "\n>> Installing terminal apps via brew"
-brew install ack ctags libyaml libuv neovim/neovim/neovim sqlite tfenv redis vim go jq zsh node@6 git
+brew install ack ctags libyaml libuv neovim/neovim/neovim sqlite redis vim jq zsh git
 
-# Install pyenv 
+# Install pyenv
 echo -e "\n>> Installing pyenv"
 curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 git clone https://github.com/yyuu/pyenv-virtualenvwrapper.git ~/.pyenv/plugins/pyenv-virtualenvwrapper
@@ -20,7 +20,6 @@ git clone https://github.com/yyuu/pyenv-virtualenvwrapper.git ~/.pyenv/plugins/p
 # Cloning dotfiles repo
 echo -e "\n>> Cloning dotfiles"
 git clone https://github.com/jasonamyers/dotfiles.git
-git clone https://github.com/nojhan/liquidprompt.git
 
 # Cloning dotfiles repo
 echo -e "\n>> Cleaning up default bash files"
@@ -46,31 +45,27 @@ for file in [a-zA-Z]* ; do
 done
 popd
 
-# Sourcing bashrc
-echo -e "\n>> Sourcing bashrc"
-source ~/.bashrc
+# Install ZSH
+echo -e "\n>> Installing ZSH"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Installing Python 2 and 3
-echo -e "\n>> Installing Python 2 and 3"
-pyenv install 2.7.13
-pyenv install 3.6.1
+# Install ZSH syntax highlighting
+echo -e "\n>> Installing ZSH syntax highlighting"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# Building neovim virtualenvs
-pyenv virtualenv 2.7.13 neovim2
-pyenv virtualenv 3.6.1 neovim3
-pyenv activate neovim2
-pip install neovim
-pyenv activate neovim3
-pip install neovim
-pip install flake8
-ln -s `pyenv which flake8` ~/bin/flake8
+# Sourcing zshrc
+echo -e "\n>> Sourcing zshrc"
+source ~/.zshrc
 
-# Running osx-for-hackers
-echo -e "\n>> Running osx-for-hackers"
-~/dotfiles/osx-for-hackers.sh
+# Install Python 2 and 3
+echo -e "\n>> Installing Python 3"
+pyenv install 3.7.6
 
-# Installing Portray
-echo -e "\n>> Installing Portray"
-curl -o /usr/local/bin/portray -L https://github.com/jasonamyers/portray/releases/download/v0.2/portray
-chmod a+x /usr/local/bin/portray
+# Install Vundle
+echo -e "\n>> Installing Vundle"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+
+# Install vim plugins
+echo -e "\n>> Installing VIM plugins"
+vim +PluginInstall +qall

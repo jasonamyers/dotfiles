@@ -47,3 +47,4 @@ rollbacks
 temp
 tmp
 .init.vim-rplugin~
+update-notifier-npm.json
